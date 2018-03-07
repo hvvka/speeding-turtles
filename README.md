@@ -6,7 +6,7 @@ Zarys klas
 
 ## Game
 Logika gry. Interfejs+klasa.
-Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia na swoje metody pakietowi z GUI.
+Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia ona swoje metody pakietowi z GUI.
 ##### Atrybuty
 - `availableCards : List<Card>`
    Karty dostępne w grze; takie, które mogą jeszcze zostać rozdane. Leżą dostępne na stosie.
