@@ -2,7 +2,7 @@ package com.pwr.game.engine.model;
 
 import java.util.List;
 
-public class Player {
+public final class Player {
 
     private final Turtle turtle;
 

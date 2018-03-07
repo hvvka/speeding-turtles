@@ -1,6 +1,6 @@
 package com.pwr.game.engine.model;
 
-public class Card {
+public final class Card {
 
     private final Turtle turtle;
 
