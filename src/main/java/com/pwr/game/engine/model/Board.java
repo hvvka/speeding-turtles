@@ -6,6 +6,10 @@ public class Board {
 
     private List<List<Turtle>> fields;
 
+    public Board(List<List<Turtle>> fields) {
+        this.fields = fields;
+    }
+
     public List<List<Turtle>> getFields() {
         return fields;
     }

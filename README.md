@@ -12,7 +12,7 @@ Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia ona swoje metody pa
    Karty dostępne w grze; takie, które mogą jeszcze zostać rozdane. Leżą dostępne na stosie.
 - `trashCards : List<Card>`
    Karty zużyte. Takie, które zostały wykorzystane przez jakiegoś gracza.
-- `points : Set<Player, int>`
+- `points : Map<Player, Integer>`
    Punkty zdobyte przez wszystkich graczy. Gra może mieć wiele rund; każda wygrana to jeden punkt dla gracza.
 - `players : List<Player>`
    Lista graczy. Indeksy na liście odpowiadają kolejności rozgrywek.
