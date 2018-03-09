@@ -9,9 +9,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-/**
- * @author <a href="mailto:226154@student.pwr.edu.pl">Hanna Grodzicka</a>
- */
 public class GameImpl implements Game {
 
     public static final int FIELDS_NUMBER = 8;
@@ -28,7 +25,8 @@ public class GameImpl implements Game {
 
     // todo lista z kolejnością graczy i ich losowanie
 
-    public GameImpl() {
+    public GameImpl(List<String> names) {
+        players = createPlayers(names);
         newGame();
         points = new HashMap<>();
         players.forEach(p -> points.put(p.getId(), 0));
@@ -61,16 +59,15 @@ public class GameImpl implements Game {
                 .collect(Collectors.toList());
     }
 
-    private List<Player> createPlayers() {
+    private List<Player> createPlayers(List<String> names) {
         return IntStream.range(0, Turtle.values().length)
                 .boxed()
-                .map(i -> new Player(i, Turtle.values()[i]))
+                .map(i -> new Player(i, names.get(i), Turtle.values()[i]))
                 .collect(Collectors.toList());
     }
 
     @Override
     public void newGame() {
-        players = createPlayers();
         createAvailableCards();
         trashCards = new ArrayList<>();
         board = new Board(createFields());

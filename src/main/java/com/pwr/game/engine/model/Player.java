@@ -6,12 +6,15 @@ public final class Player {
 
     private final Integer id;
 
+    private final String name;
+
     private final Turtle turtle;
 
     private List<Card> cards;
 
-    public Player(Integer id, Turtle turtle) {
+    public Player(Integer id, String name, Turtle turtle) {
         this.id = id;
+        this.name = name;
         this.turtle = turtle;
     }
 
