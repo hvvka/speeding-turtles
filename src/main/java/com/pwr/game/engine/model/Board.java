@@ -13,4 +13,9 @@ public class Board {
     public void setFields(List<List<Turtle>> fields) {
         this.fields = fields;
     }
+
+    public Board(List<List<Turtle>> fields) {
+        this.fields = fields;
+    }
+
 }

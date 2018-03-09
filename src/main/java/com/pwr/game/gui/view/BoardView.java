@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardView extends JPanel {
+
     //współrzędne pierwszego pola na planszy
     //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
     private int xStart = 680;
@@ -19,18 +20,23 @@ public class BoardView extends JPanel {
     private BoardController boardController;
     private List<Turtle> turtles;
 
-    private List<Field> fields;
+    private static List<Field> fieldsIcons;
 
 
+    //metoda wywoływana jak trzeba przerysować ekran
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        //zawsze maluje całą planszę
         paintBoardFields(g);
-        paintTurtlesOnStart(g, turtles);
+
+        //maluje żówie na odpowiednich polach
+        paintTurtlesOnFields(g, boardController.getFields());
+
     }
 
 
-    void paintBoardFields(Graphics g){
+    public void paintBoardFields(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
         int xTranslation = 200;
@@ -38,51 +44,69 @@ public class BoardView extends JPanel {
         int x = xStart;
         int y = yStart;
 
-        fields = new ArrayList<Field>();
-        field = new Field(x,y);
-        fields.add(field);
+        fieldsIcons = new ArrayList<Field>();
+        field = new Field(x, y);
+        fieldsIcons.add(field);
         field.paintField(g, true);
 
-        for(int i = 0; i < 8; i++){
+        for (int i = 0; i < 8; i++) {
             x -= xTranslation;
             y -= yTranslation;
 
-            field = new Field(x,y);
+            field = new Field(x, y);
             field.paintField(g, false);
-            fields.add(field);
+            fieldsIcons.add(field);
 
-            xTranslation = -xTranslation; }
+            xTranslation = -xTranslation;
+        }
     }
 
-
-    void paintTurtlesOnStart(Graphics g, List<Turtle> turtles){
+    //rysuje żółwie odpowiednio na polach
+    public void paintTurtlesOnFields(Graphics g, List<List<Turtle>> fields) {
         Graphics2D g2d = (Graphics2D) g;
 
-        int xTranslation = 2;
-        int yTranslation = 5;
-        int x = xStart + xTranslation;
-        int y = yStart + yTranslation;
+        for (int i = 0; i < fields.size(); i++) {
+            if (i == 0) {
 
-        for(Turtle turtle :  turtles){
-            TurtleIcon turtleIcon = new TurtleIcon(x, y);
-            turtleIcon.paintTurtle(g, turtle);
+                int x = fieldsIcons.get(i).getX() - 60;
+                int y = fieldsIcons.get(i).getY();
 
-            x += 34;
+                for (int j = 0; j < fields.get(i).size(); j++) {
+                    TurtleIcon turtleIcon = new TurtleIcon(x, y);
+                    turtleIcon.paintTurtle(g, fields.get(i).get(j));
+                    x += 30;
+                }
+            } else {
+                int x = fieldsIcons.get(i).getX();
+                int y = fieldsIcons.get(i).getY();
+
+                for (int j = 0; j < fields.get(i).size(); j++) {
+                    TurtleIcon turtleIcon = new TurtleIcon(x, y);
+                    turtleIcon.paintTurtle(g, fields.get(i).get(j));
+                    y -= 10;
+                }
+            }
         }
     }
 
 
-
-    void paintTurtlesOnField(Graphics g, List<Turtle> turtles){}
-
-    public BoardView(){
+    public BoardView() {
         this.boardController = new BoardController();
-        this.turtles = boardController.createTurtles();
+
 
     }
 
     public static void main(String[] args) {
-        MainFrame mf = new MainFrame();
+//        żeby dodać ten panel do frame'u rekomendowane jest
+//        dodanie go w następujący sposób (bo inaczej nie bedzie śmigać rysowanie):
+//        BoardView board = new BoardView();
+//        board.setFocusable(true);
+//        board.setLayout(new FlowLayout());
+//        setContentPane(board);
+//        setVisible(true);
+
+
+//        MainFrame mf = new MainFrame();
 
     }
 }

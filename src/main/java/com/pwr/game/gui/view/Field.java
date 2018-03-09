@@ -11,16 +11,27 @@ public class Field {
     public Field(int x, int y) {
         this.x = x;
         this.y = y;
-        this.fieldWidth = 180;
-        this.fieldHeight = 50;
+
+        this.fieldWidth = 90;
+        this.fieldHeight = 26;
+
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     void paintField(Graphics g, boolean first) {
         Graphics2D g2d = (Graphics2D) g;
         if (first) {
-            g2d.drawRoundRect(x, y, fieldWidth, fieldHeight, 15, 15);
+            g2d.drawRoundRect(x - fieldWidth, y - fieldHeight, fieldWidth*2, fieldHeight*2, 15, 15);
+
         } else {
-            g2d.drawOval(x, y, fieldWidth, fieldHeight);
+            g2d.drawOval(x - fieldWidth, y - fieldHeight, fieldWidth*2, fieldHeight*2);
         }
     }
 }
