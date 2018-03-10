@@ -17,8 +17,9 @@ public class BoardView extends JPanel {
     private int yStart = 630;
 
     private Field field;
-    private BoardController boardController;
+  //  private BoardController boardController;
     private List<Turtle> turtles;
+    private List<List<Turtle>> fields;
 
     private static List<Field> fieldsIcons;
 
@@ -31,7 +32,7 @@ public class BoardView extends JPanel {
         paintBoardFields(g);
 
         //maluje żówie na odpowiednich polach
-        paintTurtlesOnFields(g, boardController.getFields());
+        paintTurtlesOnFields(g, fields);
 
     }
 
@@ -89,9 +90,13 @@ public class BoardView extends JPanel {
         }
     }
 
-
-    public BoardView() {
-        this.boardController = new BoardController();
+    public BoardView(List<List<Turtle>> fields) {
+        this.fields = fields;
+//        setFocusable(true);
+//        setLayout(new FlowLayout());
+//        setContentPane(this);
+//        setVisible(true);
+        //this.boardController = new BoardController();
 
 
     }
@@ -106,7 +111,7 @@ public class BoardView extends JPanel {
 //        setVisible(true);
 
 
-//        MainFrame mf = new MainFrame();
+        MainFrame mf = new MainFrame();
 
     }
 }
