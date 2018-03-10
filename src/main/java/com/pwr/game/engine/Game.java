@@ -12,7 +12,7 @@ public interface Game {
 
     Player newRound();
 
-    Board makeMove(Player player, Card card);
+    Board makeMove(Card card);
 
     Map<Integer, Integer> getPoints();
 
