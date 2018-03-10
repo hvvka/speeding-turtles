@@ -17,4 +17,19 @@ public class Board {
     public void setFields(List<List<Turtle>> fields) {
         this.fields = fields;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Board board = (Board) o;
+
+        return fields != null ? fields.equals(board.fields) : board.fields == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return fields != null ? fields.hashCode() : 0;
+    }
 }

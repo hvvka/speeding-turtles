@@ -25,4 +25,38 @@ public final class Player {
     public Integer getId() {
         return id;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public Turtle getTurtle() {
+        return turtle;
+    }
+
+    public List<Card> getCards() {
+        return cards;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Player player = (Player) o;
+
+        if (id != null ? !id.equals(player.id) : player.id != null) return false;
+        if (name != null ? !name.equals(player.name) : player.name != null) return false;
+        if (turtle != player.turtle) return false;
+        return cards != null ? cards.equals(player.cards) : player.cards == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (turtle != null ? turtle.hashCode() : 0);
+        result = 31 * result + (cards != null ? cards.hashCode() : 0);
+        return result;
+    }
 }

@@ -8,6 +8,7 @@ import com.pwr.game.engine.model.Turtle;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class GameImpl implements Game {
 
@@ -23,8 +24,8 @@ public class GameImpl implements Game {
 
     private Board board;
 
-    // todo lista z kolejnością graczy i ich losowanie
 
+    // todo lista z kolejnością graczy i ich losowanie
     public GameImpl(List<String> names) {
         players = createPlayers(names);
         newGame();
@@ -35,17 +36,17 @@ public class GameImpl implements Game {
     private List<List<Turtle>> createFields() {
         // todo zrobić fixed size list ograniczone FIELDS_NUMBER
         List<List<Turtle>> fields = new ArrayList<>(FIELDS_NUMBER);
-        fields.set(0, Arrays.asList(Turtle.values()));
+        fields.add(0, Arrays.asList(Turtle.values()));
         return fields;
     }
 
     /**
      * Tworzy talię 40 kart
      */
-    private void createAvailableCards() {
+    private List<Card> createAvailableCards() {
         List<Card> cards = createCards();
-        availableCards.addAll(cards);
-        availableCards.addAll(cards);
+        return Stream.concat(cards.stream(), cards.stream())
+                .collect(Collectors.toList());
     }
 
     /**
@@ -53,6 +54,7 @@ public class GameImpl implements Game {
      */
     private List<Card> createCards() {
         return IntStream.range(-2, 3)
+                .filter(i -> i != 0)
                 .boxed()
                 .flatMap(i -> Arrays.stream(Turtle.values())
                         .map(t -> new Card(t, i)))
@@ -68,7 +70,7 @@ public class GameImpl implements Game {
 
     @Override
     public void newGame() {
-        createAvailableCards();
+        availableCards = createAvailableCards();
         trashCards = new ArrayList<>();
         board = new Board(createFields());
 
@@ -99,5 +101,30 @@ public class GameImpl implements Game {
     public Board makeMove(Player player, Card card) {
         // todo
         return null;
+    }
+
+    @Override
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    @Override
+    public Map<Integer, Integer> getPoints() {
+        return points;
+    }
+
+    @Override
+    public List<Card> getAvailableCards() {
+        return availableCards;
+    }
+
+    @Override
+    public List<Card> getTrashCards() {
+        return trashCards;
+    }
+
+    @Override
+    public Board getBoard() {
+        return board;
     }
 }
