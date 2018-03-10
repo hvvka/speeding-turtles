@@ -17,14 +17,14 @@ public interface Game {
 
     Board makeMove(Player player, Card card);
 
-    public List<Player> getPlayers();
+    List<Player> getPlayers();
 
-    public Map<Integer, Integer> getPoints();
+    Map<Integer, Integer> getPoints();
 
-    public List<Card> getAvailableCards();
+    List<Card> getAvailableCards();
 
-    public List<Card> getTrashCards();
+    List<Card> getTrashCards();
 
-    public Board getBoard();
+    Board getBoard();
 
 }

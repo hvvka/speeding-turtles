@@ -13,7 +13,7 @@ class GameImplNewGameTest extends Specification {
     }
 
     @Unroll
-    def "checks if player number #playerIndex have expected id, name and turtle"() {
+    def "player #id has expected id=#id, name=#name and turtle=#turtle"() {
         given:
         game.newGame()
 
@@ -29,5 +29,46 @@ class GameImplNewGameTest extends Specification {
         2  | "Twigligh Sparkle" | Turtle.RED
         3  | "Apple Jack"       | Turtle.GREEN
         4  | "Rarity"           | Turtle.PURPLE
+    }
+
+    @Unroll
+    def "player #id has #points points"() {
+        given:
+        game.newGame()
+
+        expect:
+        points == game.getPoints().get(id)
+
+        where:
+        id | points
+        0  | 0
+        1  | 0
+        2  | 0
+        3  | 0
+        4  | 0
+    }
+
+    @Unroll
+    def "trash cards are empty"() {
+        given:
+        def expectedCards = []
+
+        when:
+        game.newGame()
+
+        then:
+        expectedCards == game.getTrashCards()
+    }
+
+    @Unroll
+    def "new board has all the turtles on the first field"() {
+        given:
+        def expectedBoard = [[Turtle.YELLOW, Turtle.BLUE, Turtle.RED, Turtle.GREEN, Turtle.PURPLE]]
+
+        when:
+        game.newGame()
+
+        then:
+        expectedBoard == game.getBoard().getFields()
     }
 }
