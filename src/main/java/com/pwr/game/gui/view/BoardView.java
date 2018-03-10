@@ -92,24 +92,13 @@ public class BoardView extends JPanel {
 
     public BoardView(List<List<Turtle>> fields) {
         this.fields = fields;
-//        setFocusable(true);
-//        setLayout(new FlowLayout());
-//        setContentPane(this);
-//        setVisible(true);
-        //this.boardController = new BoardController();
+        setFocusable(true);
+        setLayout(new FlowLayout());
 
 
     }
 
     public static void main(String[] args) {
-//        żeby dodać ten panel do frame'u rekomendowane jest
-//        dodanie go w następujący sposób (bo inaczej nie bedzie śmigać rysowanie):
-//        BoardView board = new BoardView();
-//        board.setFocusable(true);
-//        board.setLayout(new FlowLayout());
-//        setContentPane(board);
-//        setVisible(true);
-
 
         MainFrame mf = new MainFrame();
 
