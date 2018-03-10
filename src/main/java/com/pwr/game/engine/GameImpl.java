@@ -24,11 +24,12 @@ public class GameImpl implements Game {
 
     private Board board;
 
+    private List<Integer> playingOrder;
 
-    // todo lista z kolejnością graczy i ich losowanie
-    public GameImpl(List<String> names) {
-        players = createPlayers(names);
-        newGame();
+    private int currentPlaymaker;
+
+    public GameImpl(List<String> playerNames) {
+        players = createPlayers(playerNames);
         points = new HashMap<>();
         players.forEach(p -> points.put(p.getId(), 0));
     }
@@ -41,7 +42,7 @@ public class GameImpl implements Game {
     }
 
     /**
-     * Tworzy talię 40 kart
+     * Creates deck of 40 cards.
      */
     private List<Card> createAvailableCards() {
         List<Card> cards = createCards();
@@ -50,7 +51,9 @@ public class GameImpl implements Game {
     }
 
     /**
-     * @return lista kart z każdym żółwiem i z każdą z liczb: -2, -1, 1, 2
+     * Returns 20 different cards of every possible card combination (turtle colour with a move).
+     *
+     * @return a list of cards with every turtle combined with each of the following numbers: -2, -1, 1, 2
      */
     private List<Card> createCards() {
         return IntStream.range(-2, 3)
@@ -69,13 +72,17 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void newGame() {
+    public Board newGame() {
+        currentPlaymaker = 0;
         availableCards = createAvailableCards();
         trashCards = new ArrayList<>();
         board = new Board(createFields());
+        playingOrder = createPlayingOrder();
 
         Collections.shuffle(availableCards);            // miesza karty
         players.forEach(p -> p.setCards(getDeck()));    // daje po 5 kart do łapki gracza
+
+        return board;
     }
 
     private List<Card> getDeck() {
@@ -85,27 +92,81 @@ public class GameImpl implements Game {
         return deck;
     }
 
-
-    @Override
-    public void resetGame() {
-        // todo
+    private List<Integer> createPlayingOrder() {
+        List<Integer> newPlayingOrder = players.stream().map(Player::getId).collect(Collectors.toList());
+        Collections.shuffle(newPlayingOrder);
+        return newPlayingOrder;
     }
 
     @Override
     public Player newRound() {
-        // todo
-        return null;
+        int playerIdForThisRound = playingOrder.get(currentPlaymaker);
+        shuffleCardsIfNoneAreAvailable();
+        getOneCard(players.get(playerIdForThisRound));
+        currentPlaymaker++;
+
+        return players.get(playerIdForThisRound);
+    }
+
+    private void shuffleCardsIfNoneAreAvailable() {
+        if (availableCards.isEmpty()) {
+            Collections.shuffle(trashCards);
+            availableCards.addAll(trashCards);
+        }
+    }
+
+    private void getOneCard(Player player) {
+        player.getCards().add(availableCards.remove(0));
     }
 
     @Override
     public Board makeMove(Player player, Card card) {
-        // todo
-        return null;
+        Turtle turleToBeMoved = card.getTurtle();
+        int moveDistance = card.getMove();
+
+        Optional<List<Turtle>> turtleCurrentField = getTurtleCurrentField(turleToBeMoved);
+        int turtleCurrentFieldIndex = board.getFields().indexOf(turtleCurrentField);
+        Optional<Integer> turtleCurrentIndex = getTurtleCurrentIndex(turleToBeMoved);
+
+        if (turtleCurrentFieldIndex == 0) {
+            // wykonaj ruch bez przesuwania żółwi
+            moveTurtleFromStartField(turleToBeMoved, moveDistance, turtleCurrentFieldIndex);
+        } else {
+            // wykonaj ruch z przesuwaniem żółwi nad przesuwanym
+            moveTurtleWithOtherTurtles(moveDistance, turtleCurrentFieldIndex, turtleCurrentIndex);
+        }
+
+        // utylizacja karty
+        trashCards.add(card);
+        player.getCards().remove(card);
+
+        return board;
     }
 
-    @Override
-    public List<Player> getPlayers() {
-        return players;
+    private void moveTurtleWithOtherTurtles(int moveDistance, int turtleCurrentFieldIndex, Optional<Integer> turtleCurrentIndex) {
+        int lastTurtleIndex = board.getFields().get(turtleCurrentFieldIndex).size() - 1;
+        List<Turtle> turtlesToBeMoved = board.getFields()
+                .get(turtleCurrentFieldIndex)
+                .subList(turtleCurrentIndex.get(), lastTurtleIndex);
+        board.getFields().get(moveDistance).addAll(turtlesToBeMoved);
+    }
+
+    private void moveTurtleFromStartField(Turtle turleToBeMoved, int moveDistance, int turtleCurrentFieldIndex) {
+        board.getFields().get(turtleCurrentFieldIndex).remove(turleToBeMoved);
+        board.getFields().get(moveDistance).add(turleToBeMoved);
+    }
+
+    private Optional<Integer> getTurtleCurrentIndex(Turtle turleToBeMoved) {
+        return board.getFields().stream()
+                .map(field -> field.indexOf(turleToBeMoved))
+                .filter(index -> index != -1)
+                .findFirst();
+    }
+
+    private Optional<List<Turtle>> getTurtleCurrentField(Turtle turleToBeMoved) {
+        return board.getFields().stream()
+                .filter(field -> field.contains(turleToBeMoved))
+                .findFirst();
     }
 
     @Override
@@ -113,18 +174,4 @@ public class GameImpl implements Game {
         return points;
     }
 
-    @Override
-    public List<Card> getAvailableCards() {
-        return availableCards;
-    }
-
-    @Override
-    public List<Card> getTrashCards() {
-        return trashCards;
-    }
-
-    @Override
-    public Board getBoard() {
-        return board;
-    }
 }

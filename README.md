@@ -12,7 +12,7 @@ Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia ona swoje metody pa
    Karty dostępne w grze; takie, które mogą jeszcze zostać rozdane. Leżą dostępne na stosie.
 - `trashCards : List<Card>`
    Karty zużyte. Takie, które zostały wykorzystane przez jakiegoś gracza.
-- `points : Map<Player, Integer>`
+- `points : Map<Integer, Integer>`
    Punkty zdobyte przez wszystkich graczy. Gra może mieć wiele rund; każda wygrana to jeden punkt dla gracza.
 - `players : List<Player>`
    Lista graczy. Indeksy na liście odpowiadają kolejności rozgrywek.
@@ -20,10 +20,8 @@ Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia ona swoje metody pa
    Plansza. Określa położenie żółwi.
 
 ##### Metody
-+ `newGame() : void`
++ `newGame() : Board`
    Nowa gra. Zbiera wszystkie karty (z rąk graczy i ze stosu `trashCards`) i je tasuje (`shuffleCards`). Czyści całą planszę tj. ustawia żółwie na pierwszym polu. Losuje kolejność rozgrywek graczy.
-+ `resetGame() : void`
-   Funkcjonalności `newGame()`, ale też czyści punkty zdobyte przez graczy.
 + `newRound() : Player`
    Tworzy nową rundę dla kolejnego gracza. Dobiera mu kartę (`getCard(player : Player)`). Sprawdza czy trzeba potasować karty ze stosu. Zwraca gracza by wyświetlić jego aktualne karty.
 - `getCard(player : Player) : Card`
@@ -45,6 +43,8 @@ _Metody publiczne są wylistowane za pomocą "+", a prywatne "-"_
 ## Player
 Gracz posiadający kolorowego żółwia.
 ##### Atrybuty
+- `id : Integer`
+   Identyfikator gracza.
 - `card : List<Card>`
    Lista pięciu kart w ręce gracza. Karty mogą się powtarzać.
 - `turtle : Turtle`
