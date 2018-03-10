@@ -18,11 +18,6 @@ public class GameImplTest {
     }
 
     @Test
-    public void resetGame() {
-        // todo
-    }
-
-    @Test
     public void newRound() {
         // todo
     }

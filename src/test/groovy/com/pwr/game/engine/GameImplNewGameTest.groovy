@@ -1,12 +1,17 @@
 package com.pwr.game.engine
 
+import com.pwr.game.engine.model.Board
+import com.pwr.game.engine.model.Card
+import com.pwr.game.engine.model.Player
 import com.pwr.game.engine.model.Turtle
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import java.lang.reflect.Field
+
 class GameImplNewGameTest extends Specification {
 
-    Game game;
+    Game game
 
     void setup() {
         game = new GameImpl(["Pinky Pie", "Rainbow Dash", "Twigligh Sparkle", "Apple Jack", "Rarity"])
@@ -16,11 +21,14 @@ class GameImplNewGameTest extends Specification {
     def "player #id has expected id=#id, name=#name and turtle=#turtle"() {
         given:
         game.newGame()
+        Field field = game.getClass().getDeclaredField("players")
+        field.setAccessible(true)
+        List<Player> players = field.get(game)
 
         expect:
-        id == game.getPlayers().get(id).getId()
-        name == game.getPlayers().get(id).getName()
-        turtle == game.getPlayers().get(id).getTurtle()
+        id == players.get(id).getId()
+        name == players.get(id).getName()
+        turtle == players.get(id).getTurtle()
 
         where:
         id | name               | turtle
@@ -35,9 +43,12 @@ class GameImplNewGameTest extends Specification {
     def "player #id has #numberOfCards cards in hand"() {
         given:
         game.newGame()
+        Field field = game.getClass().getDeclaredField("players")
+        field.setAccessible(true)
+        List<Player> players = field.get(game)
 
         expect:
-        numberOfCards == game.getPlayers().get(id).getCards().size()
+        numberOfCards == players.get(id).getCards().size()
 
         where:
         id | numberOfCards
@@ -72,9 +83,12 @@ class GameImplNewGameTest extends Specification {
 
         when:
         game.newGame()
+        Field field = game.getClass().getDeclaredField("trashCards")
+        field.setAccessible(true)
+        List<Card> trashCards = field.get(game)
 
         then:
-        expectedCards == game.getTrashCards()
+        expectedCards == trashCards
     }
 
     @Unroll
@@ -84,8 +98,11 @@ class GameImplNewGameTest extends Specification {
 
         when:
         game.newGame()
+        Field field = game.getClass().getDeclaredField("board")
+        field.setAccessible(true)
+        Board board = field.get(game)
 
         then:
-        expectedBoard == game.getBoard().getFields()
+        expectedBoard == board.getFields()
     }
 }
