@@ -18,4 +18,22 @@ public final class Card {
     public int getMove() {
         return move;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Card card = (Card) o;
+
+        if (move != card.move) return false;
+        return turtle == card.turtle;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = turtle != null ? turtle.hashCode() : 0;
+        result = 31 * result + move;
+        return result;
+    }
 }
