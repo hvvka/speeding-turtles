@@ -44,12 +44,12 @@ public class DecisionFrameController {
 
     private void initListeners() {
         continueButton.addActionListener(al -> {
-            new BoardController(game.newGame(), game);
+//            new BoardController(game.newGame(), game);
             decisionFrame.dispose();
         });
 
         rankingResetButton.addActionListener(al -> {
-            new MainFrameController();
+//            new MainFrameController();
             decisionFrame.dispose();
         });
 
