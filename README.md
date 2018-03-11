@@ -38,8 +38,11 @@ Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia ona swoje metody pa
    Dostaje kartę od obecnie rozgrywającego gracza. Wykonuje jego ruch, zwraca zmodyfikowaną plansze po ruchu.
    Inkrementuje kolejkę graczy (następne wywołanie `newRound` będzie dla kolejnego gracza) 
    Bierze pod uwagę, że więcej niż jeden żółw mogą się poruszyć przez rzucenie jednej karty.
-+ `getPoints() : Map<Integer, Integer>`
-   Zwraca strukturę przechowującą ID gracza oraz jego wynik w punktach. Wyniki trzeba ręcznie modyfikować pod stronie GUI.
++ `getResult() : Map<Player, Integer>`
+   Zwraca strukturę przechowującą gracza oraz jego wynik w punktach.
++ `winGame() : void` 
+   Pozwala na aktualizację wyniku gracza. Dodaje punkt obecnie rozgrywającemu graczowi. 
+   Trzeba ręcznie wywoływać pod stronie GUI przy każdej wygranej gracza.
 
 
 ## **Modele:**

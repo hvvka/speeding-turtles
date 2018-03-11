@@ -23,7 +23,7 @@ class GameImplNewGameTest extends Specification {
         game.newGame()
         Field field = game.getClass().getDeclaredField("players")
         field.setAccessible(true)
-        List<Player> players = field.get(game)
+        List<Player> players = field.get(game) as List<Player>
 
         expect:
         id == players.get(id).getId()
@@ -45,7 +45,7 @@ class GameImplNewGameTest extends Specification {
         game.newGame()
         Field field = game.getClass().getDeclaredField("players")
         field.setAccessible(true)
-        List<Player> players = field.get(game)
+        List<Player> players = field.get(game) as List<Player>
 
         expect:
         numberOfCards == players.get(id).getCards().size()
@@ -63,12 +63,15 @@ class GameImplNewGameTest extends Specification {
     def "player #id has #points points"() {
         given:
         game.newGame()
+        Field field = game.getClass().getDeclaredField("points")
+        field.setAccessible(true)
+        Map<Integer, Integer> points = field.get(game) as Map<Integer, Integer>
 
         expect:
-        points == game.getPoints().get(id)
+        expectedPoints == points.get(id)
 
         where:
-        id | points
+        id | expectedPoints
         0  | 0
         1  | 0
         2  | 0
@@ -85,7 +88,7 @@ class GameImplNewGameTest extends Specification {
         game.newGame()
         Field field = game.getClass().getDeclaredField("trashCards")
         field.setAccessible(true)
-        List<Card> trashCards = field.get(game)
+        List<Card> trashCards = field.get(game) as List<Card>
 
         then:
         expectedCards == trashCards
@@ -101,7 +104,7 @@ class GameImplNewGameTest extends Specification {
         game.newGame()
         Field field = game.getClass().getDeclaredField("board")
         field.setAccessible(true)
-        Board board = field.get(game)
+        Board board = field.get(game) as Board
 
         then:
         expectedBoard == board.getFields()
