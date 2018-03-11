@@ -128,10 +128,10 @@ public class GameImpl implements Game {
             System.out.println("PLAYER DOESN'T HAVE SUCH CARD");   // to powinien by wyjątek, może kiedyś, w wersji 2.0 nim będzie
         }
 
-        Turtle turleToBeMoved = card.getTurtle();
+        Turtle turtleToBeMoved = card.getTurtle();
         int moveDistance = card.getMove();
-        int turtleCurrentFieldIndex = getTurtleCurrentFieldIndex(turleToBeMoved);
-        int turtleCurrentIndex = getTurtleCurrentIndex(turleToBeMoved);
+        int turtleCurrentFieldIndex = getTurtleCurrentFieldIndex(turtleToBeMoved);
+        int turtleCurrentIndex = getTurtleCurrentIndex(turtleToBeMoved);
 
         if (turtleCurrentFieldIndex + moveDistance < 0) {
             System.out.println("FORBIDDEN MOVE");
@@ -140,7 +140,7 @@ public class GameImpl implements Game {
         }
 
         if (turtleCurrentFieldIndex == 0) {
-            moveTurtleFromStartField(turleToBeMoved, moveDistance);
+            moveTurtleFromStartField(turtleToBeMoved, moveDistance);
         } else {
             moveTurtleWithOtherTurtles(moveDistance, turtleCurrentFieldIndex, turtleCurrentIndex);
         }
@@ -151,10 +151,10 @@ public class GameImpl implements Game {
         return board;
     }
 
-    private int getTurtleCurrentFieldIndex(Turtle turleToBeMoved) {
+    private int getTurtleCurrentFieldIndex(Turtle turtleToBeMoved) {
         return IntStream.range(0, board.getFields().size())
                 .boxed()
-                .filter(i -> board.getFields().get(i).indexOf(turleToBeMoved) != -1)
+                .filter(i -> board.getFields().get(i).indexOf(turtleToBeMoved) != -1)
                 .findFirst().get();
     }
 
@@ -175,14 +175,14 @@ public class GameImpl implements Game {
         }
     }
 
-    private void moveTurtleFromStartField(Turtle turleToBeMoved, int moveDistance) {
-        board.getFields().get(0).remove(turleToBeMoved);
-        board.getFields().get(moveDistance).add(turleToBeMoved);
+    private void moveTurtleFromStartField(Turtle turtleToBeMoved, int moveDistance) {
+        board.getFields().get(0).remove(turtleToBeMoved);
+        board.getFields().get(moveDistance).add(turtleToBeMoved);
     }
 
-    private int getTurtleCurrentIndex(Turtle turleToBeMoved) {
+    private int getTurtleCurrentIndex(Turtle turtleToBeMoved) {
         return board.getFields().stream()
-                .map(field -> field.indexOf(turleToBeMoved))
+                .map(field -> field.indexOf(turtleToBeMoved))
                 .filter(index -> index != -1)
                 .findFirst().get();
     }
