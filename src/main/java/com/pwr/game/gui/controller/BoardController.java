@@ -51,11 +51,11 @@ public class BoardController {
             buttonPanel.setButtonImages(player = game.newRound());
             buttonPanel.repaint();
         };
-        buttonPanel.getButton1().addActionListener(buttonsListener);
-        buttonPanel.getButton2().addActionListener(buttonsListener);
-        buttonPanel.getButton3().addActionListener(buttonsListener);
-        buttonPanel.getButton4().addActionListener(buttonsListener);
-        buttonPanel.getButton5().addActionListener(buttonsListener);
+        buttonPanel.getCard1Button().addActionListener(buttonsListener);
+        buttonPanel.getCard2Button().addActionListener(buttonsListener);
+        buttonPanel.getCard3Button().addActionListener(buttonsListener);
+        buttonPanel.getCard4Button().addActionListener(buttonsListener);
+        buttonPanel.getCard5Button().addActionListener(buttonsListener);
     }
 
     public static void main(String[] args) {

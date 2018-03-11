@@ -8,33 +8,33 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ButtonPanel extends JPanel {
-    private JButton button1;
-    private JButton button2;
-    private JButton button3;
-    private JButton button4;
-    private JButton button5;
+    private JButton card1Button;
+    private JButton card2Button;
+    private JButton card3Button;
+    private JButton card4Button;
+    private JButton card5Button;
     private CardIcon cardIcon;
     private ButtonGroup buttons;
     private ArrayList<AbstractButton> listButtons;
 
-    public JButton getButton1() {
-        return button1;
+    public JButton getCard1Button() {
+        return card1Button;
     }
 
-    public JButton getButton2() {
-        return button2;
+    public JButton getCard2Button() {
+        return card2Button;
     }
 
-    public JButton getButton3() {
-        return button3;
+    public JButton getCard3Button() {
+        return card3Button;
     }
 
-    public JButton getButton4() {
-        return button4;
+    public JButton getCard4Button() {
+        return card4Button;
     }
 
-    public JButton getButton5() {
-        return button5;
+    public JButton getCard5Button() {
+        return card5Button;
     }
 
     public ArrayList<AbstractButton> getListButtons() {
@@ -51,22 +51,22 @@ public class ButtonPanel extends JPanel {
 
         buttons = new ButtonGroup();
 
-        buttons.add(button1);
-        buttons.add(button2);
-        buttons.add(button3);
-        buttons.add(button4);
-        buttons.add(button5);
+        buttons.add(card1Button);
+        buttons.add(card2Button);
+        buttons.add(card3Button);
+        buttons.add(card4Button);
+        buttons.add(card5Button);
 
-        add(button1);
-        button1.setName("0");
-        add(button2);
-        button2.setName("1");
-        add(button3);
-        button3.setName("2");
-        add(button4);
-        button4.setName("3");
-        add(button5);
-        button5.setName("4");
+        add(card1Button);
+        card1Button.setName("0");
+        add(card2Button);
+        card2Button.setName("1");
+        add(card3Button);
+        card3Button.setName("2");
+        add(card4Button);
+        card4Button.setName("3");
+        add(card5Button);
+        card5Button.setName("4");
 
         listButtons = Collections.list(buttons.getElements());
 
