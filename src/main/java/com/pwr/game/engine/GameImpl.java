@@ -165,7 +165,7 @@ public class GameImpl implements Game {
         List<Turtle> turtlesToBeMoved = board.getFields()
                 .get(turtleCurrentFieldIndex)
                 .subList(turtleCurrentIndex, lastTurtleIndex + 1);
-        if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER) {
+        if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER - 1) {
             board.getFields().get(FIELDS_NUMBER - 1).addAll(turtlesToBeMoved);
         } else {
             board.getFields().get(turtleCurrentFieldIndex + moveDistance).addAll(turtlesToBeMoved);
