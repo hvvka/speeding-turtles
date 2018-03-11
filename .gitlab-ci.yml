@@ -28,9 +28,9 @@ test:
     - ./gradlew check
 
 deploy:
-  stage: deploy
+  stage: build, test
   script:
-    - ./deploy
+    - ./build.gradle
 
 after_script:
   - echo "End CI"
