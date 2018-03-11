@@ -77,8 +77,9 @@ public class DecisionFrame extends JFrame {
         int maxPoints = (int) rankingTableData[0][1];
         stringBuilder.append(rankingTableData[0][0]);
         int i = 1;
-        while ((int) rankingTableData[i][1] == maxPoints) {
-            stringBuilder.append(", ").append(rankingTableData[i][0]);
+        while ((i < rankingTableData.length) && ((int) rankingTableData[i][1] == maxPoints)) {
+            stringBuilder.append(", ");
+            stringBuilder.append(rankingTableData[i][0]);
             i++;
         }
         stringBuilder.append("!!!");
@@ -88,15 +89,12 @@ public class DecisionFrame extends JFrame {
     }
 
     public void createRankingTable(Game game) {
-        Map<Integer, Integer> points = game.getPoints();
+        Map<Player, Integer> points = game.getResult();
         rankingTableData = new Object[points.size()][2];
-        Map<Integer, Integer> sortedPoints = MapUtil.sortByValue(points);
-
+        Map<Player, Integer> sortedPoints = MapUtil.sortByValue(points);
         int i = 0;
-        List<Player> players = game.getPlayers();
-        for (Map.Entry<Integer, Integer> entry : sortedPoints.entrySet()) {
-            Player player = players.get(entry.getKey());
-            rankingTableData[i][0] = player.getTurtle();
+        for (Map.Entry<Player, Integer> entry : sortedPoints.entrySet()) {
+            rankingTableData[i][0] = entry.getKey().getTurtle();
             rankingTableData[i][1] = entry.getValue();
             i++;
         }

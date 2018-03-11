@@ -1,9 +1,13 @@
 package com.pwr.game.gui.controller;
 
 import com.pwr.game.engine.Game;
+import com.pwr.game.engine.GameImpl;
+import com.pwr.game.engine.model.Player;
 import com.pwr.game.gui.view.DecisionFrame;
 
 import javax.swing.*;
+import java.util.Arrays;
+import java.util.Map;
 
 /**
  * @author zlakomiak226190
@@ -34,9 +38,9 @@ public class DecisionFrameController {
         rankingResetButton = decisionFrame.getRankingResetButton();
         gameExitButton = decisionFrame.getGameExitButton();
 
+        decisionFrame.createButtonsLabels();
         decisionFrame.createRankingTable(game);
         decisionFrame.createCongratulationsLabel();
-        decisionFrame.createButtonsLabels();
     }
 
     private void initListeners() {
@@ -57,6 +61,5 @@ public class DecisionFrameController {
             System.exit(0);
         });
     }
-
 
 }
