@@ -30,7 +30,7 @@ test:
 deploy:
   stage: build
   script:
-    - ./build.gradle
+    - ./gradlew build
 
 after_script:
   - echo "End CI"
