@@ -81,4 +81,18 @@ public class GameImplTest {
 //        Assert.assertNotEquals(expectedPlayer.getCards(), actualPlayer.getCards());
     }
 
+    @Test
+    public void winGame() {
+        // given
+        int currentPlaymaker = playingOrder.get(0);
+        int expectedScore = 1;
+
+        // when
+        game.winGame();
+        int actualScore = game.getResult().get(players.get(currentPlaymaker));
+
+        // then
+        Assert.assertEquals(expectedScore, actualScore);
+    }
+
 }
