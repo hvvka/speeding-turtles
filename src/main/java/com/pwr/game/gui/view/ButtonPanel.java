@@ -80,6 +80,6 @@ public class ButtonPanel extends JPanel {
             cardIcon = new CardIcon(player.getCards().get(i));
             listButtons.get(i).setIcon(cardIcon.paintCard(player.getCards().get(i)));
         }
-        currentPlayerLabel.setText("Teraz gra " + player.getName() +":" );
+        //currentPlayerLabel.setText("Teraz gra " + player.getName() +":" );
     }
 }

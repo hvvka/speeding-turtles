@@ -12,9 +12,8 @@ public class FieldIcon {
         this.x = x;
         this.y = y;
 
-        this.fieldWidth = 100;
+        this.fieldWidth = 80;
         this.fieldHeight = 26;
-
     }
 
     public int getX() {

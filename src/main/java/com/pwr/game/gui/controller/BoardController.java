@@ -11,6 +11,7 @@ import com.pwr.game.gui.view.BoardView;
 import com.pwr.game.gui.view.ButtonPanel;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.List;
@@ -29,6 +30,7 @@ public class BoardController {
         this.fields = board.getFields();
 
         MainFrame mf = new MainFrame(boardView, buttonPanel);
+        showNextPlayer();
 
         initListeners(game);
         }
@@ -43,12 +45,16 @@ public class BoardController {
 
     private void initListeners(Game game){
         ActionListener buttonsListener = actionEvent -> {
+
             JButton button = (JButton) actionEvent.getSource();
             Card card = player.getCards().get(Integer.parseInt(button.getName()));
-            System.out.println(card.getMove() + card.getTurtle().toString());
+
             boardView.setFields(game.makeMove(card).getFields());
-            boardView.repaint();
             buttonPanel.setButtonImages(player = game.newRound());
+
+            showNextPlayer();
+
+            boardView.repaint();
             buttonPanel.repaint();
         };
         buttonPanel.getCard1Button().addActionListener(buttonsListener);
@@ -56,6 +62,13 @@ public class BoardController {
         buttonPanel.getCard3Button().addActionListener(buttonsListener);
         buttonPanel.getCard4Button().addActionListener(buttonsListener);
         buttonPanel.getCard5Button().addActionListener(buttonsListener);
+    }
+
+    private void showNextPlayer(){
+        buttonPanel.setVisible(false);
+        JOptionPane.showMessageDialog(new Frame(), "Kolejnym graczem jest " + player.getName());
+        buttonPanel.setVisible(true);
+
     }
 
     public static void main(String[] args) {

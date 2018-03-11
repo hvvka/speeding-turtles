@@ -15,7 +15,7 @@ public class BoardView extends JPanel {
     //współrzędne pierwszego pola na planszy
     //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    private int xStart = (int) (dimension.width/1.75);
+    private int xStart = (int) (dimension.width/1.65);
     private int yStart = (int) (dimension.height/1.6);
     private FieldIcon field;
     private Image imageIcon;
@@ -45,7 +45,7 @@ public class BoardView extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         int xTranslation = (int) (dimension.width/7.4);
-        int yTranslation = (int) (dimension.height/15);;
+        int yTranslation = (int) (dimension.height/14);;
         int x = xStart;
         int y = yStart;
 
@@ -54,7 +54,7 @@ public class BoardView extends JPanel {
         fieldsIcons.add(field);
         field.paintField(g, true);
 
-        for (int i = 0; i < GameImpl.FIELDS_NUMBER; i++) {
+        for (int i = 0; i < fields.size()-1; i++) {
             x -= xTranslation;
             y -= yTranslation;
 
@@ -62,7 +62,9 @@ public class BoardView extends JPanel {
             field.paintField(g, false);
             fieldsIcons.add(field);
 
-            xTranslation = -xTranslation;
+            if(i%2 == 1){
+                xTranslation = -xTranslation;}
+
         }
     }
 
@@ -70,7 +72,7 @@ public class BoardView extends JPanel {
     public void paintTurtlesOnFields(Graphics g, List<List<Turtle>> fields) {
         Graphics2D g2d = (Graphics2D) g;
 
-        for (int i = 0; i < fields.size(); i++) {
+        for (int i = 0; i < GameImpl.FIELDS_NUMBER; i++) {
             if (i == 0) {
 
                 int x = fieldsIcons.get(i).getX() - 70;
@@ -98,7 +100,6 @@ public class BoardView extends JPanel {
         this.fields = fields;
         imageIcon = new ImageIcon("src/main/resources/turtle-icons/background.jpg").getImage();
         setFocusable(true);
-
     }
 
 }
