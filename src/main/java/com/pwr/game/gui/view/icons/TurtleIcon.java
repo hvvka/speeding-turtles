@@ -13,8 +13,8 @@ public class TurtleIcon {
     public TurtleIcon(int x, int y) {
         this.x = x;
         this.y = y;
-        this.fieldWidth = 20;
-        this.fieldHeight = 16;
+        this.fieldWidth = 16;
+        this.fieldHeight = 20;
     }
 
     public void paintTurtle(Graphics g, Turtle turtle) {

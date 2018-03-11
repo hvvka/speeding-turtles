@@ -6,8 +6,6 @@ import com.pwr.game.gui.view.icons.CardIcon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -20,28 +18,36 @@ public class ButtonPanel extends JPanel {
     private CardIcon cardIcon;
     private ButtonGroup buttons;
     private ArrayList<AbstractButton> listButtons;
-    private Card card;
+
+    public JButton getButton1() {
+        return button1;
+    }
+
+    public JButton getButton2() {
+        return button2;
+    }
+
+    public JButton getButton3() {
+        return button3;
+    }
+
+    public JButton getButton4() {
+        return button4;
+    }
+
+    public JButton getButton5() {
+        return button5;
+    }
+
+    public ArrayList<AbstractButton> getListButtons() {
+        return listButtons;
+    }
 
     public ButtonPanel(Player player){
         setButtonList();
         setButtonImages(player);
-
-        ActionListener buttonsListener = actionEvent -> {
-            JButton button = (JButton) actionEvent.getSource();
-            card = player.getCards().get(Integer.parseInt(button.getName()));
-        };
-
-        button1.addActionListener(buttonsListener);
-        button2.addActionListener(buttonsListener);
-        button3.addActionListener(buttonsListener);
-        button4.addActionListener(buttonsListener);
-        button5.addActionListener(buttonsListener);
-
     }
 
-    public Card getCard() {
-        return card;
-    }
 
     private void setButtonList(){
 
@@ -68,10 +74,9 @@ public class ButtonPanel extends JPanel {
 
     }
 
-    private void setButtonImages(Player player){
+    public void setButtonImages(Player player){
 
         for(int i = 0; i < player.getCards().size(); i++) {
-            System.out.println(player.getCards().size());
             cardIcon = new CardIcon(player.getCards().get(i));
             listButtons.get(i).setIcon(cardIcon.paintCard(player.getCards().get(i)));
         }

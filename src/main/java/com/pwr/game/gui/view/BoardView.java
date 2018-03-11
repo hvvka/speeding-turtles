@@ -17,9 +17,10 @@ public class BoardView extends JPanel {
     //współrzędne pierwszego pola na planszy
     //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    private int xStart = (int) (dimension.width/1.7);
-    private int yStart = (int) dimension.height/2;
+    private int xStart = (int) (dimension.width/1.75);
+    private int yStart = (int) (dimension.height/1.6);
     private FieldIcon field;
+    private Image imageIcon;
 
     private List<List<Turtle>> fields;
     private static List<FieldIcon> fieldsIcons;
@@ -29,6 +30,8 @@ public class BoardView extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        g.drawImage(imageIcon, 0, 0, getWidth(), getHeight(), this);
         //zawsze maluje całą planszę
         paintBoardFields(g);
 
@@ -42,7 +45,7 @@ public class BoardView extends JPanel {
         Graphics2D g2d = (Graphics2D) g;
 
         int xTranslation = (int) (dimension.width/7.4);
-        int yTranslation = (int) (dimension.height/18);;
+        int yTranslation = (int) (dimension.height/15);;
         int x = xStart;
         int y = yStart;
 
@@ -93,6 +96,7 @@ public class BoardView extends JPanel {
 
     public BoardView(List<List<Turtle>> fields) {
         this.fields = fields;
+        imageIcon = new ImageIcon(TurtleIcon.class.getResource("resources/background.jpg")).getImage();
         setFocusable(true);
 
     }
