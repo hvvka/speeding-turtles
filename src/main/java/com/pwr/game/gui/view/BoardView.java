@@ -75,13 +75,18 @@ public class BoardView extends JPanel {
         for (int i = 0; i < GameImpl.FIELDS_NUMBER; i++) {
             if (i == 0) {
 
-                int x = fieldsIcons.get(i).getX() - 70;
-                int y = fieldsIcons.get(i).getY();
+                int x = fieldsIcons.get(i).getX() - 30;
+                int y = fieldsIcons.get(i).getY() - 40;
 
                 for (int j = 0; j < fields.get(i).size(); j++) {
                     TurtleIcon turtleIcon = new TurtleIcon(x, y);
-                    turtleIcon.paintTurtle(g, fields.get(i).get(j));
-                    x += 35;
+                    turtleIcon.paintTurtleIcon(g, fields.get(i).get(j));
+                    if(j != 2){
+                        x += 35;
+                        y += 15;}
+                        else{
+                        x = fieldsIcons.get(i).getX() - 30;
+                    }
                 }
             } else {
                 int x = fieldsIcons.get(i).getX();
@@ -89,8 +94,8 @@ public class BoardView extends JPanel {
 
                 for (int j = 0; j < fields.get(i).size(); j++) {
                     TurtleIcon turtleIcon = new TurtleIcon(x, y);
-                    turtleIcon.paintTurtle(g, fields.get(i).get(j));
-                    y -= 10;
+                    turtleIcon.paintTurtleIcon(g, fields.get(i).get(j));
+                    y -= 15;
                 }
             }
         }

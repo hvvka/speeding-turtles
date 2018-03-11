@@ -8,73 +8,22 @@ import java.awt.*;
 public class TurtleIcon {
     private int x;
     private int y;
-    private int fieldWidth;
-    private int fieldHeight;
+    private StringBuilder path;
 
     public TurtleIcon(int x, int y) {
         this.x = x;
         this.y = y;
-        this.fieldWidth = 16;
-        this.fieldHeight = 20;
-    }
-
-    public void paintTurtle(Graphics g, Turtle turtle) {
-        Graphics2D g2d = (Graphics2D) g;
-
-        switch (turtle) {
-            case YELLOW:
-                g2d.setColor(Color.YELLOW);
-                break;
-
-            case BLUE:
-                g2d.setColor(Color.BLUE);
-                break;
-
-            case RED:
-                g2d.setColor(Color.RED);
-                break;
-
-            case GREEN:
-                g2d.setColor(Color.GREEN);
-                break;
-
-            case PURPLE:
-                g2d.setColor(Color.MAGENTA);
-                break;
-
-            default:
-                throw new AssertionError("Unknown operations ");
-        }
-        g2d.fillOval(x - fieldWidth, y - fieldHeight, fieldWidth*2, fieldHeight*2);
+        this.path =  new StringBuilder("src/main/resources/board-icons/turtle_");
     }
 
     public void paintTurtleIcon(Graphics g, Turtle turtle) {
         Graphics2D g2d = (Graphics2D) g;
 
-        switch (turtle) {
-            case YELLOW:
-                g2d.setColor(Color.YELLOW);
-                break;
+        this.path.append(turtle.toString().toLowerCase()).toString();
+        this.path.append(".png").toString();
 
-            case BLUE:
-                g2d.setColor(Color.BLUE);
-                break;
+        Image image = new ImageIcon(this.path.toString()).getImage();
 
-            case RED:
-                g2d.setColor(Color.RED);
-                break;
-
-            case GREEN:
-                g2d.setColor(Color.GREEN);
-                break;
-
-            case PURPLE:
-                g2d.setColor(Color.MAGENTA);
-                break;
-
-            default:
-                throw new AssertionError("Unknown operations ");
-        }
-        g2d.fillOval(x - fieldWidth, y - fieldHeight, fieldWidth*2, fieldHeight*2);
+        g.drawImage(image, x - image.getWidth(null) / 2, y - image.getHeight(null) / 2, null);
     }
 }
