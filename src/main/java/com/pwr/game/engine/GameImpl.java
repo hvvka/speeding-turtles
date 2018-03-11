@@ -146,7 +146,7 @@ public class GameImpl implements Game {
         }
 
         throwCard(card);
-        currentPlaymaker++;
+        currentPlaymaker = (++currentPlaymaker) % 5;
 
         return board;
     }
