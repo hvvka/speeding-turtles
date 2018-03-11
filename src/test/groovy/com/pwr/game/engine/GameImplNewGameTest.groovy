@@ -94,7 +94,8 @@ class GameImplNewGameTest extends Specification {
     @Unroll
     def "new board has all the turtles on the first field"() {
         given:
-        def expectedBoard = [[Turtle.YELLOW, Turtle.BLUE, Turtle.RED, Turtle.GREEN, Turtle.PURPLE]]
+        def expectedBoard = [[Turtle.YELLOW, Turtle.BLUE, Turtle.RED, Turtle.GREEN, Turtle.PURPLE],
+                             [], [], [], [], [], [], []]
 
         when:
         game.newGame()
