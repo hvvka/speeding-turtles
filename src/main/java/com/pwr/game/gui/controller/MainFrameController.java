@@ -34,11 +34,21 @@ public class MainFrameController {
 
     private List<String> getAllPlayerNames(){
         List<String> playerNames = new ArrayList<>();
-        playerNames.add(playerOneTextField.getText());
-        playerNames.add(playerTwoTextField.getText());
-        playerNames.add(playerThreeTextField.getText());
-        playerNames.add(playerFourTextField.getText());
-        playerNames.add(playerFiveTextField.getText());
+        String playerOneName   = playerOneTextField.getText();
+        String playerTwoName   = playerTwoTextField.getText();
+        String playerThreeName = playerThreeTextField.getText();
+        String playerFourName  = playerFourTextField.getText();
+        String playerFiveName  = playerFiveTextField.getText();
+        if(playerOneName.equals(""))   playerOneName   = "Fluttershy";
+        if(playerTwoName.equals(""))   playerTwoName   = "Rainbow Dash";
+        if(playerThreeName.equals("")) playerThreeName = "Big Macintosh";
+        if(playerFourName.equals(""))  playerFourName  = "Green Jewel";
+        if(playerFiveName.equals(""))  playerFiveName  = "Twilight Sparkle";
+        playerNames.add(playerOneName);
+        playerNames.add(playerTwoName);
+        playerNames.add(playerThreeName);
+        playerNames.add(playerFourName);
+        playerNames.add(playerFiveName);
         return playerNames;
     }
 

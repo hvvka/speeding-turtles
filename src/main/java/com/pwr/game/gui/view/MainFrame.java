@@ -32,6 +32,7 @@ public class MainFrame extends JFrame{
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        labelLogo.setIcon(new ImageIcon(new ImageIcon("resources/applogo.png").getImage().getScaledInstance(490,245,Image.SCALE_SMOOTH)));
     }
 
     public JButton getStartButton() {
