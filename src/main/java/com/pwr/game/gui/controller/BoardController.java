@@ -22,12 +22,17 @@ public class BoardController {
     private BoardView boardView;
     private ButtonPanel buttonPanel;
     private Player player;
+    private Board board;
+    private GameImpl game;
+
     public BoardController(Board board, GameImpl game){
 
         this.player = game.newRound();
         this.boardView = new BoardView(board.getFields());
         this.buttonPanel = new ButtonPanel(player);
         this.fields = board.getFields();
+        this.board = board;
+        this.game = game;
 
         MainFrame mf = new MainFrame(boardView, buttonPanel);
         showNextPlayer();
@@ -56,6 +61,8 @@ public class BoardController {
 
             boardView.repaint();
             buttonPanel.repaint();
+
+            isWinner();
         };
         buttonPanel.getCard1Button().addActionListener(buttonsListener);
         buttonPanel.getCard2Button().addActionListener(buttonsListener);
@@ -69,6 +76,12 @@ public class BoardController {
         JOptionPane.showMessageDialog(new Frame(), "Kolejnym graczem jest " + player.getName());
         buttonPanel.setVisible(true);
 
+    }
+
+    private void isWinner(){
+        if(!board.getFields().get(game.FIELDS_NUMBER-1).isEmpty()){
+            JOptionPane.showMessageDialog(new Frame(), "Wygrał se ktoś");
+        }
     }
 
     public static void main(String[] args) {

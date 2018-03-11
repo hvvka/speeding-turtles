@@ -44,7 +44,6 @@ public class TurtleIcon {
             default:
                 throw new AssertionError("Unknown operations ");
         }
-        System.out.println(turtle);
         g2d.fillOval(x - fieldWidth, y - fieldHeight, fieldWidth*2, fieldHeight*2);
     }
 }
