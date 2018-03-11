@@ -6,14 +6,12 @@ import com.pwr.game.engine.model.Board;
 import com.pwr.game.engine.model.Card;
 import com.pwr.game.engine.model.Player;
 import com.pwr.game.engine.model.Turtle;
-import com.pwr.game.gui.MainFrame;
+import com.pwr.game.gui.view.MainFrame;
 import com.pwr.game.gui.view.BoardView;
 import com.pwr.game.gui.view.ButtonPanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

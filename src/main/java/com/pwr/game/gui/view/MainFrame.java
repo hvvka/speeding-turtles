@@ -1,4 +1,4 @@
-package com.pwr.game.gui;
+package com.pwr.game.gui.view;
 
 import com.pwr.game.engine.GameImpl;
 import com.pwr.game.engine.model.Board;

@@ -1,9 +1,7 @@
 package com.pwr.game.gui.view;
 
-import com.pwr.game.engine.Game;
 import com.pwr.game.engine.GameImpl;
 import com.pwr.game.engine.model.Turtle;
-import com.pwr.game.gui.MainFrame;
 import com.pwr.game.gui.view.icons.FieldIcon;
 import com.pwr.game.gui.view.icons.TurtleIcon;
 

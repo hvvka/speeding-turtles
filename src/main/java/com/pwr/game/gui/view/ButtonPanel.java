@@ -1,11 +1,9 @@
 package com.pwr.game.gui.view;
 
-import com.pwr.game.engine.model.Card;
 import com.pwr.game.engine.model.Player;
 import com.pwr.game.gui.view.icons.CardIcon;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
