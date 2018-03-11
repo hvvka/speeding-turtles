@@ -95,12 +95,11 @@ public class BoardView extends JPanel {
         this.fields = fields;
         setFocusable(true);
 
-
     }
 
-//    public static void main(String[] args) {
-//
-//        MainFrame mf = new MainFrame();
-//
-//    }
+    public static void main(String[] args) {
+
+        MainFrame mf = new MainFrame();
+
+    }
 }
