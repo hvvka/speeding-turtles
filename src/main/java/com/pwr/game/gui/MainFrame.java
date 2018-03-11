@@ -16,24 +16,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainFrame extends JFrame {
-    private ButtonPanel buttonPanel;
-    private BoardView boardView;
+    private JPanel panel1;
 
 
-    public MainFrame() {
+    public MainFrame(BoardView boardView, ButtonPanel buttonPanel) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
         setSize(dimension.width, dimension.height);
 
-        GameImpl game = new GameImpl(Arrays.asList("Pinky Pie", "Rainbow Dash", "Twigligh Sparkle", "Apple Jack", "Rarity"));
-        Board board = game.newGame();
-        Player player = game.newRound();
-        boardView = new BoardView(board.getFields());
-        buttonPanel = new ButtonPanel(player);
-
-        BoardController boardController = new BoardController(boardView, buttonPanel, board, game, player);
-
-        add(buttonPanel, BorderLayout.SOUTH);
         add(boardView, BorderLayout.CENTER);
+        add(buttonPanel, BorderLayout.SOUTH);
         setVisible(true);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

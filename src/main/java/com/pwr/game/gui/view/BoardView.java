@@ -23,8 +23,11 @@ public class BoardView extends JPanel {
     private Image imageIcon;
 
     private List<List<Turtle>> fields;
-    private static List<FieldIcon> fieldsIcons;
+    private List<FieldIcon> fieldsIcons;
 
+    public void setFields(List<List<Turtle>> fields) {
+        this.fields = fields;
+    }
 
     //metoda wywoływana jak trzeba przerysować ekran
     @Override
@@ -101,9 +104,4 @@ public class BoardView extends JPanel {
 
     }
 
-    public static void main(String[] args) {
-
-        MainFrame mf = new MainFrame();
-
-    }
 }
