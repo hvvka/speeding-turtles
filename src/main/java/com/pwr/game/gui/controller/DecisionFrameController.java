@@ -46,7 +46,8 @@ public class DecisionFrameController {
         });
 
         rankingResetButton.addActionListener(al -> {
-            game.resetGame();
+//            game.resetGame();
+//            todo: reset
             decisionFrame.createRankingTable(game);
             decisionFrame.createCongratulationsLabel();
         });
