@@ -14,6 +14,8 @@ public interface Game {
 
     Board makeMove(Card card);
 
-    Map<Integer, Integer> getPoints();
+    Map<Player, Integer> getResult();
+
+    void winGame();
 
 }

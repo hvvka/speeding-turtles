@@ -14,7 +14,10 @@ public class GameImpl implements Game {
 
     public static final int FIELDS_NUMBER = 8;
 
+    private static final int PLAYERS_NUMBER = 5;
+
     private List<Player> players;
+
 
     private Map<Integer, Integer> points;
 
@@ -90,7 +93,7 @@ public class GameImpl implements Game {
     }
 
     private List<Card> getDeck() {
-        List<Card> sublist = availableCards.subList(0, 5);
+        List<Card> sublist = availableCards.subList(0, PLAYERS_NUMBER);
         List<Card> deck = new ArrayList<>(sublist);
         System.out.println(deck.size());
         sublist.clear();
@@ -120,7 +123,7 @@ public class GameImpl implements Game {
     }
 
     private void getOneCard(Player player) {
-        if (player.getCards().size() < 5)
+        if (player.getCards().size() < PLAYERS_NUMBER)
             player.getCards().add(availableCards.remove(0));
     }
 
@@ -148,7 +151,7 @@ public class GameImpl implements Game {
         }
 
         throwCard(card);
-        currentPlaymaker = (++currentPlaymaker) % 5;
+        currentPlaymaker = (++currentPlaymaker) % PLAYERS_NUMBER;
 
         return board;
     }
@@ -190,8 +193,16 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public Map<Integer, Integer> getPoints() {
-        return points;
+    public Map<Player, Integer> getResult() {
+        Map<Player, Integer> playersResult = new HashMap<>();
+        for (int i = 0; i < PLAYERS_NUMBER; i++)
+            playersResult.put(players.get(i), points.get(i));
+
+        return playersResult;
     }
 
+    @Override
+    public void winGame() {
+        points.merge(currentPlaymaker, 1, (oldValue, one) -> oldValue + one);
+    }
 }
