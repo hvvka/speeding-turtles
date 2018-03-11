@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.pwr.game.gui.view.DecisionFrame">
+  <grid id="27dc6" binding="decisionFramePanel" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <grid id="774c0" binding="congratulationsPanel" layout-manager="BorderLayout" hgap="20" vgap="20">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="e1ed0" class="javax.swing.JLabel" binding="congratulationsLabel">
+            <constraints border-constraint="Center"/>
+            <properties>
+              <horizontalTextPosition value="10"/>
+              <text value="Label"/>
+            </properties>
+          </component>
+          <vspacer id="ae4f8">
+            <constraints border-constraint="North"/>
+          </vspacer>
+          <hspacer id="9a60b">
+            <constraints border-constraint="West"/>
+          </hspacer>
+          <hspacer id="54bd2">
+            <constraints border-constraint="East"/>
+          </hspacer>
+          <vspacer id="76b0b">
+            <constraints border-constraint="South"/>
+          </vspacer>
+        </children>
+      </grid>
+      <grid id="753be" binding="rankingPanel" layout-manager="BorderLayout" hgap="20" vgap="30">
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <vspacer id="410c2">
+            <constraints border-constraint="North"/>
+          </vspacer>
+          <hspacer id="ae952">
+            <constraints border-constraint="West"/>
+          </hspacer>
+          <hspacer id="f9ed7">
+            <constraints border-constraint="East"/>
+          </hspacer>
+          <vspacer id="c1fd1">
+            <constraints border-constraint="South"/>
+          </vspacer>
+          <scrollpane id="53918" binding="rankingTableScrollPane">
+            <constraints border-constraint="Center"/>
+            <properties/>
+            <border type="none"/>
+            <children/>
+          </scrollpane>
+        </children>
+      </grid>
+      <grid id="e5430" binding="buttonsPanel" layout-manager="GridBagLayout">
+        <constraints border-constraint="East"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="ffd5e" class="javax.swing.JButton" binding="continueButton">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <actionCommand value=""/>
+              <text value=""/>
+            </properties>
+          </component>
+          <hspacer id="5543d">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="55d09">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+          <component id="c0c35" class="javax.swing.JButton" binding="rankingResetButton">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <actionCommand value=""/>
+              <text value=""/>
+            </properties>
+          </component>
+          <vspacer id="56a03">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+          <component id="2cd46" class="javax.swing.JButton" binding="gameExitButton">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+            <properties>
+              <actionCommand value=""/>
+              <text value=""/>
+            </properties>
+          </component>
+          <hspacer id="ef68a">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <hspacer id="d4cb7">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </hspacer>
+          <vspacer id="8e272">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+              <gridbag weightx="0.0" weighty="0.0"/>
+            </constraints>
+          </vspacer>
+        </children>
+      </grid>
+    </children>
+  </grid>
+</form>
