@@ -28,7 +28,7 @@ test:
     - ./gradlew check
 
 deploy:
-  stage: build, test
+  stage: build
   script:
     - ./build.gradle
 
