@@ -47,6 +47,7 @@ public class BoardController {
         ActionListener buttonsListener = actionEvent -> {
             JButton button = (JButton) actionEvent.getSource();
             Card card = player.getCards().get(Integer.parseInt(button.getName()));
+            System.out.println(card.getMove() + card.getTurtle().toString());
             boardView.setFields(game.makeMove(card).getFields());
             boardView.repaint();
             buttonPanel.setButtonImages(player = game.newRound());

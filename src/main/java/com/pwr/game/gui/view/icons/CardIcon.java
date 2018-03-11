@@ -30,7 +30,6 @@ public class CardIcon {
 
         this.path += card.getTurtle().toString().toLowerCase() + ".png";
 
-//        ImageIcon imageIcon = new ImageIcon(TurtleIcon.class.getResource(this.path));
         ImageIcon imageIcon = new ImageIcon(this.path);
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(100, 160,  java.awt.Image.SCALE_SMOOTH);

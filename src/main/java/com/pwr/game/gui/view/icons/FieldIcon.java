@@ -27,6 +27,7 @@ public class FieldIcon {
 
     public void paintField(Graphics g, boolean first) {
         Graphics2D g2d = (Graphics2D) g;
+
         g2d.setColor(Color.lightGray);
         if (first) {
             g2d.fillRoundRect(x - fieldWidth, y - fieldHeight, fieldWidth*2, fieldHeight*2, 15, 15);
