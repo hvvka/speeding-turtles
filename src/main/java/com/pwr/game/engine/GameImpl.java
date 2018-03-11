@@ -18,7 +18,6 @@ public class GameImpl implements Game {
 
     private List<Player> players;
 
-
     private Map<Integer, Integer> points;
 
     private List<Card> availableCards;
@@ -38,7 +37,6 @@ public class GameImpl implements Game {
     }
 
     private List<List<Turtle>> createFields() {
-        // todo zrobić fixed size list ograniczone FIELDS_NUMBER
         List<List<Turtle>> fields = new ArrayList<>(FIELDS_NUMBER);
         fields.add(0, new ArrayList<>(Arrays.asList(Turtle.values())));
         for (int i = 1; i < FIELDS_NUMBER; i++) {
