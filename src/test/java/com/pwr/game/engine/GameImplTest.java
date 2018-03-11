@@ -66,7 +66,6 @@ public class GameImplTest {
     @Test
     public void newRound() {
         // given
-        game.makeMove(players.get(playingOrder.get(0)).getCards().get(0));
         Player expectedPlayer = new Player(players.get(playingOrder.get(0)).getId(),
                 players.get(playingOrder.get(0)).getName(), players.get(playingOrder.get(0)).getTurtle());
         expectedPlayer.setCards(new ArrayList<>(players.get(playingOrder.get(0)).getCards()));
