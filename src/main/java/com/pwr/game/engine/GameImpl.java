@@ -93,7 +93,6 @@ public class GameImpl implements Game {
     private List<Card> getDeck() {
         List<Card> sublist = availableCards.subList(0, PLAYERS_NUMBER);
         List<Card> deck = new ArrayList<>(sublist);
-        System.out.println(deck.size());
         sublist.clear();
         return deck;
     }
