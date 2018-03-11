@@ -1,4 +1,4 @@
-package com.pwr.game.gui.view;
+package com.pwr.game.gui.view.icons;
 
 import com.pwr.game.engine.model.Turtle;
 
@@ -17,8 +17,9 @@ public class TurtleIcon {
         this.fieldHeight = 16;
     }
 
-    void paintTurtle(Graphics g, Turtle turtle) {
+    public void paintTurtle(Graphics g, Turtle turtle) {
         Graphics2D g2d = (Graphics2D) g;
+
         switch (turtle) {
             case YELLOW:
                 g2d.setColor(Color.YELLOW);
