@@ -5,14 +5,14 @@
       <xy x="20" y="20" width="500" height="400"/>
     </constraints>
     <properties>
-      <background color="-865838"/>
+      <background color="-9316627"/>
     </properties>
     <border type="none"/>
     <children>
       <grid id="774c0" binding="congratulationsPanel" layout-manager="BorderLayout" hgap="20" vgap="20">
         <constraints border-constraint="North"/>
         <properties>
-          <background color="-865838"/>
+          <background color="-9316627"/>
         </properties>
         <border type="none"/>
         <children>
@@ -40,7 +40,7 @@
       <grid id="753be" binding="rankingPanel" layout-manager="BorderLayout" hgap="20" vgap="30">
         <constraints border-constraint="Center"/>
         <properties>
-          <background color="-865838"/>
+          <background color="-9316627"/>
         </properties>
         <border type="none"/>
         <children>
@@ -70,7 +70,7 @@
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints border-constraint="East"/>
         <properties>
-          <background color="-865838"/>
+          <background color="-9316627"/>
         </properties>
         <border type="none"/>
         <children>
@@ -80,7 +80,7 @@
             </constraints>
             <properties>
               <actionCommand value=""/>
-              <background color="-1847081"/>
+              <background color="-9115393"/>
               <text value=""/>
             </properties>
           </component>
@@ -90,7 +90,7 @@
             </constraints>
             <properties>
               <actionCommand value=""/>
-              <background color="-1847081"/>
+              <background color="-9115393"/>
               <text value=""/>
             </properties>
           </component>
@@ -100,7 +100,7 @@
             </constraints>
             <properties>
               <actionCommand value=""/>
-              <background color="-1847081"/>
+              <background color="-9115393"/>
               <text value=""/>
             </properties>
           </component>

@@ -15,7 +15,7 @@ public class DecisionFrameController {
     private final Game game;
     private final Player lastWinner;
 
-    private final String exitMessage = "Do zobaczenia przy następnej grze!";
+    private final static String EXIT_MESSAGE = "Do zobaczenia przy następnej grze!";
 
     private JButton continueButton;
     private JButton rankingResetButton;
@@ -56,7 +56,7 @@ public class DecisionFrameController {
         });
 
         gameExitButton.addActionListener(al -> {
-            JOptionPane.showMessageDialog(null, exitMessage);
+            JOptionPane.showMessageDialog(null, EXIT_MESSAGE);
             System.exit(0);
         });
     }

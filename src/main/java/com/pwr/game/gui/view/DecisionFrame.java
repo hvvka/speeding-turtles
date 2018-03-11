@@ -19,11 +19,11 @@ public class DecisionFrame extends JFrame {
 
     private static final int WIDTH = 500;
     private static final int HEIGHT = 500;
-    private static final String decisionFrameTitle = "Ranking graczy";
-    private static final String congratulationsString = "Gratulacje wygrania ostatniej rundy";
-    private static final String continueButtonText = "Kontynuuj";
-    private static final String rankingResetButtonText = "Resetuj ranking";
-    private static final String gameExitButtonText = "Zakończ grę";
+    private static final String DECISION_FRAME_TITLE = "Ranking graczy";
+    private static final String CONGRATULATIONS_STRING = "Gratulacje wygrania ostatniej rundy";
+    private static final String CONTINUE_BUTTON_TEXT = "Kontynuuj";
+    private static final String RANKING_RESET_BUTTON_TEXT = "Resetuj ranking";
+    private static final String GAME_EXIT_BUTTON_TEXT = "Zakończ grę";
 
     private JPanel decisionFramePanel;
 
@@ -37,9 +37,7 @@ public class DecisionFrame extends JFrame {
 
     private JPanel rankingPanel;
     private JScrollPane rankingTableScrollPane;
-    private JTable rankingTable;
-    private String[] rankingTableColumnNames = {"Gracz", "Liczba punktów"};
-    private Object[][] rankingTableData;
+    private final String[] rankingTableColumnNames = {"Gracz", "Liczba punktów"};
 
     public JButton getContinueButton() {
         return continueButton;
@@ -53,13 +51,9 @@ public class DecisionFrame extends JFrame {
         return gameExitButton;
     }
 
-    public JPanel getDecisionFramePanel() {
-        return decisionFramePanel;
-    }
-
 
     public DecisionFrame() {
-        super(decisionFrameTitle);
+        super(DECISION_FRAME_TITLE);
         setSize(WIDTH, HEIGHT);
         setLocationRelativeTo(null);
         setContentPane(decisionFramePanel);
@@ -67,26 +61,25 @@ public class DecisionFrame extends JFrame {
     }
 
     public void createButtonsLabels() {
-        continueButton.setText(continueButtonText);
-        rankingResetButton.setText(rankingResetButtonText);
-        gameExitButton.setText(gameExitButtonText);
+        continueButton.setText(CONTINUE_BUTTON_TEXT);
+        rankingResetButton.setText(RANKING_RESET_BUTTON_TEXT);
+        gameExitButton.setText(GAME_EXIT_BUTTON_TEXT);
         buttonsPanel.repaint();
         buttonsPanel.revalidate();
     }
 
     public void createCongratulationsLabel(Player lastWinner) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(congratulationsString + ", ");
-        stringBuilder.append(lastWinner.getTurtle());
-        stringBuilder.append("!!!");
-        congratulationsLabel.setText(stringBuilder.toString());
+        String stringBuilder = (CONGRATULATIONS_STRING + ", ") +
+                lastWinner.getTurtle() +
+                "!!!";
+        congratulationsLabel.setText(stringBuilder);
         congratulationsPanel.repaint();
         congratulationsPanel.revalidate();
     }
 
     public void createRankingTable(Game game) {
         Map<Player, Integer> points = game.getResult();
-        rankingTableData = new Object[points.size()][2];
+        Object[][] rankingTableData = new Object[points.size()][2];
         Map<Player, Integer> sortedPoints = MapUtil.sortByValue(points);
         int i = 0;
         for (Map.Entry<Player, Integer> entry : sortedPoints.entrySet()) {
@@ -94,7 +87,7 @@ public class DecisionFrame extends JFrame {
             rankingTableData[i][1] = entry.getValue();
             i++;
         }
-        rankingTable = new JTable(new DefaultTableModel(rankingTableData, rankingTableColumnNames));
+        JTable rankingTable = new JTable(new DefaultTableModel(rankingTableData, rankingTableColumnNames));
         rankingTable.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
         rankingTableScrollPane.setViewportView(rankingTable);
         rankingPanel.repaint();
@@ -116,20 +109,26 @@ class MapUtil {
 }
 
 class CustomRenderer extends DefaultTableCellRenderer {
+    @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         String description = table.getValueAt(row, column).toString();
 
-        if (description == "YELLOW")
-            cellComponent.setBackground(Color.YELLOW);
-        else if (description == "BLUE")
-            cellComponent.setBackground(new Color(90, 90, 255));
-        else if (description == "RED")
-            cellComponent.setBackground(Color.RED);
-        else if (description == "GREEN")
-            cellComponent.setBackground(Color.GREEN);
-        else if (description == "PURPLE")
-            cellComponent.setBackground(new Color(150, 50, 255));
+        if ("YELLOW".equals(description)) {
+            cellComponent.setBackground(new Color(249,255,195));
+
+        } else if ("BLUE".equals(description)) {
+            cellComponent.setBackground(new Color(186,209,255));
+
+        } else if ("RED".equals(description)) {
+            cellComponent.setBackground(new Color(255,201,189));
+
+        } else if ("GREEN".equals(description)) {
+            cellComponent.setBackground(new Color(187,255,189));
+
+        } else if ("PURPLE".equals(description)) {
+            cellComponent.setBackground(new Color(239,193,255));
+        }
 
         return cellComponent;
     }
