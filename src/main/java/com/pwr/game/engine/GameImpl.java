@@ -197,6 +197,6 @@ public class GameImpl implements Game {
 
     @Override
     public void winGame() {
-        points.merge(currentPlaymaker, 1, (oldValue, one) -> oldValue + one);
+        points.merge(playingOrder.get(currentPlaymaker), 1, (oldValue, one) -> oldValue + one);
     }
 }
