@@ -4,6 +4,9 @@ import com.pwr.game.engine.Game;
 import com.pwr.game.engine.model.Player;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -14,8 +17,8 @@ import java.util.Map;
  */
 public class DecisionFrame extends JFrame {
 
-    private static final int WIDTH = 800;
-    private static final int HEIGHT = 600;
+    private static final int WIDTH = 600;
+    private static final int HEIGHT = 300;
     private static final String decisionFrameTitle = "Ranking graczy";
     private static final String congratulationsString = "Gratulacje";
     private static final String continueButtonText = "Kontynuuj";
@@ -98,7 +101,8 @@ public class DecisionFrame extends JFrame {
             rankingTableData[i][1] = entry.getValue();
             i++;
         }
-        rankingTable = new JTable(rankingTableData, rankingTableColumnNames);
+        rankingTable = new JTable(new DefaultTableModel(rankingTableData, rankingTableColumnNames));
+        rankingTable.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
         rankingTableScrollPane.setViewportView(rankingTable);
         rankingPanel.repaint();
         rankingPanel.revalidate();
@@ -115,5 +119,25 @@ class MapUtil {
             result.put(entry.getKey(), entry.getValue());
         }
         return result;
+    }
+}
+
+class CustomRenderer extends DefaultTableCellRenderer {
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+        String description = table.getValueAt(row, column).toString();
+
+        if (description == "YELLOW")
+            cellComponent.setBackground(Color.YELLOW);
+        else if (description == "BLUE")
+            cellComponent.setBackground(new Color(90, 90, 255));
+        else if (description == "RED")
+            cellComponent.setBackground(Color.RED);
+        else if (description == "GREEN")
+            cellComponent.setBackground(Color.GREEN);
+        else if (description == "PURPLE")
+            cellComponent.setBackground(new Color(150, 50, 255));
+
+        return cellComponent;
     }
 }
