@@ -40,7 +40,7 @@ public class FieldIcon {
     public void paintFieldIcon(Graphics g, boolean first) {
         Graphics2D g2d = (Graphics2D) g;
 
-        Image image = new ImageIcon("src/main/resources/turtle-icons/field.png").getImage();
+        Image image = new ImageIcon("src/main/resources/board-icons/field.png").getImage();
 
         g.drawImage(image, x - image.getWidth(null)/2, y - image.getHeight(null)/2, null);
         g2d.setColor(Color.lightGray);

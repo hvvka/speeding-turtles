@@ -10,7 +10,7 @@ public class CardIcon {
     private StringBuilder path;
 
     public CardIcon(Card card){
-        this.path = new StringBuilder("src/main/resources/turtle-icons/");
+        this.path = new StringBuilder("src/main/resources/cards-icons/");
     }
 
     public ImageIcon paintCard(Card card){

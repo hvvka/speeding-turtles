@@ -98,7 +98,7 @@ public class BoardView extends JPanel {
 
     public BoardView(List<List<Turtle>> fields) {
         this.fields = fields;
-        imageIcon = new ImageIcon("src/main/resources/turtle-icons/background.jpg").getImage();
+        imageIcon = new ImageIcon("src/main/resources/board-icons/background.jpg").getImage();
         setFocusable(true);
     }
 
