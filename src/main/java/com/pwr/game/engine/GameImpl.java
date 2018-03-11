@@ -127,7 +127,7 @@ public class GameImpl implements Game {
 
     @Override
     public Board makeMove(Card card) {
-        if (!players.get(currentPlaymaker).getCards().contains(card)) {
+        if (!players.get(playingOrder.get(currentPlaymaker)).getCards().contains(card)) {
             System.out.println("PLAYER DOESN'T HAVE SUCH CARD");   // to powinien by wyjątek, może kiedyś, w wersji 2.0 nim będzie
         }
 
@@ -138,11 +138,7 @@ public class GameImpl implements Game {
 
         if (turtleCurrentFieldIndex + moveDistance < 0) {
             System.out.println("FORBIDDEN MOVE");
-            throwCard(card);
-            return board;
-        }
-
-        if (turtleCurrentFieldIndex == 0) {
+        } else if (turtleCurrentFieldIndex == 0) {
             moveTurtleFromStartField(turtleToBeMoved, moveDistance);
         } else {
             moveTurtleWithOtherTurtles(moveDistance, turtleCurrentFieldIndex, turtleCurrentIndex);
