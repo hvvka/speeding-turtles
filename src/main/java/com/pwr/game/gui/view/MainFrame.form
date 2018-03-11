@@ -15,7 +15,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="cb227" class="javax.swing.JLabel">
+          <component id="cb227" class="javax.swing.JLabel" binding="labelLogo">
             <constraints border-constraint="Center"/>
             <properties>
               <horizontalAlignment value="0"/>

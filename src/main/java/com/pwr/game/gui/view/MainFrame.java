@@ -1,6 +1,7 @@
 package com.pwr.game.gui.view;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainFrame extends JFrame{
     /**
@@ -12,7 +13,7 @@ public class MainFrame extends JFrame{
      */
     private static final int HEIGHT = 500;
     private JPanel mainPanel;
-    private JButton buttonStart;
+    private JButton startButton;
     private JLabel labelPlayerOneName;
     private JTextField textFieldPlayerFiveName;
     private JTextField textFieldPlayerOneName;
@@ -23,6 +24,7 @@ public class MainFrame extends JFrame{
     private JLabel labelPlayerThreeName;
     private JLabel labelPlayerFourName;
     private JLabel labelPlayerFiveName;
+    private JLabel labelLogo;
 
     public MainFrame() {
         super("Speeding–Turtles");
@@ -30,6 +32,30 @@ public class MainFrame extends JFrame{
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+
+    public JButton getStartButton() {
+        return startButton;
+    }
+
+    public JTextField getTextFieldPlayerFiveName() {
+        return textFieldPlayerFiveName;
+    }
+
+    public JTextField getTextFieldPlayerOneName() {
+        return textFieldPlayerOneName;
+    }
+
+    public JTextField getTextFieldPlayerTwoName() {
+        return textFieldPlayerTwoName;
+    }
+
+    public JTextField getTextFieldPlayerThreeName() {
+        return textFieldPlayerThreeName;
+    }
+
+    public JTextField getTextFieldPlayerFourName() {
+        return textFieldPlayerFourName;
     }
 
     private void createUIComponents() {
