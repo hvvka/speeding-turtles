@@ -86,8 +86,9 @@ public class GameImpl implements Game {
     }
 
     private List<Card> getDeck() {
-        List<Card> sublist = availableCards.subList(0, 4);
+        List<Card> sublist = availableCards.subList(0, 5);
         List<Card> deck = new ArrayList<>(sublist);
+        System.out.println(deck.size());
         sublist.clear();
         return deck;
     }

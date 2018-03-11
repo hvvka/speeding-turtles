@@ -18,7 +18,6 @@ public class ButtonPanel extends JPanel {
     private JButton button4;
     private JButton button5;
     private CardIcon cardIcon;
-   // private ArrayList<JButton> buttons;
     private ButtonGroup buttons;
     private ArrayList<AbstractButton> listButtons;
     private Card card;
@@ -71,7 +70,7 @@ public class ButtonPanel extends JPanel {
 
     private void setButtonImages(Player player){
 
-        for(int i = 0; i < player.getCards().size()-1; i++) {
+        for(int i = 0; i < player.getCards().size(); i++) {
             System.out.println(player.getCards().size());
             cardIcon = new CardIcon(player.getCards().get(i));
             listButtons.get(i).setIcon(cardIcon.paintCard(player.getCards().get(i)));
