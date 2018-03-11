@@ -3,6 +3,7 @@ package com.pwr.game.gui.view.icons;
 import com.pwr.game.engine.model.Card;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class CardIcon {
 
@@ -29,7 +30,11 @@ public class CardIcon {
 
         this.path += card.getTurtle().toString().toLowerCase() + ".png";
 
-        return new ImageIcon(TurtleIcon.class.getResource(this.path));
+        ImageIcon imageIcon = new ImageIcon(TurtleIcon.class.getResource(this.path));
+        Image image = imageIcon.getImage();
+        Image newimg = image.getScaledInstance(100, 160,  java.awt.Image.SCALE_SMOOTH);
 
+        return new ImageIcon(newimg);
         }
+
 }
