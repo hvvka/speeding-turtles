@@ -12,32 +12,35 @@ Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia ona swoje metody pa
    Karty dostępne w grze; takie, które mogą jeszcze zostać rozdane. Leżą dostępne na stosie.
 - `trashCards : List<Card>`
    Karty zużyte. Takie, które zostały wykorzystane przez jakiegoś gracza.
-- `points : Map<Player, Integer>`
+- `points : Map<Integer, Integer>`
    Punkty zdobyte przez wszystkich graczy. Gra może mieć wiele rund; każda wygrana to jeden punkt dla gracza.
 - `players : List<Player>`
    Lista graczy. Indeksy na liście odpowiadają kolejności rozgrywek.
 - `board : Board`
    Plansza. Określa położenie żółwi.
+- `playingOrder : List<Integer>`
+   Kolejność rozgrywek graczy. Przechowuje ID graczy. Pierwszy w kolejności jest gracz na indeksie 0.
+- `currentPlaymaker : int`
+   Gracz, który zarządza obecną rozgrywką. Ustawiony jest indeks z listy playingOrder. 
+
 
 ##### Metody
-+ `newGame() : void`
-   Nowa gra. Zbiera wszystkie karty (z rąk graczy i ze stosu `trashCards`) i je tasuje (`shuffleCards`). Czyści całą planszę tj. ustawia żółwie na pierwszym polu. Losuje kolejność rozgrywek graczy.
-+ `resetGame() : void`
-   Funkcjonalności `newGame()`, ale też czyści punkty zdobyte przez graczy.
++ `newGame() : Board`
+   Nowa gra. Tworzy karty, tworzy obiekt planszy (`Board`). Rozdaje każdemu z graczy po pięć kart do ręki.
+   Czyści całą planszę tj. ustawia żółwie na pierwszym polu. Losuje kolejność rozgrywek graczy.
+   Zwraca planszę by móc ją wyświetlić (jej pola) na GUI.
 + `newRound() : Player`
-   Tworzy nową rundę dla kolejnego gracza. Dobiera mu kartę (`getCard(player : Player)`). Sprawdza czy trzeba potasować karty ze stosu. Zwraca gracza by wyświetlić jego aktualne karty.
-- `getCard(player : Player) : Card`
-   Daj kartę – zwraca graczowi, jeśli nie ma 5 kart w ręce, kartę ze stosu.
-- `increasePoints(player : Player) : void`
-   Dodaj punkty graczowi - gdy gracz wygrywa.
-- `shuffleCards() : void`
-   Potasuj karty - wykonywane na początek gry albo w razie braku kart w grze (stos `availableCards` jest pusty, a trzeba coś dobrać).
-+ `makeMove(player : Player, card : Card) : Board`
-   Wykonaj ruch – wykonuje ruch gracza. Musi brać po uwagę, że więcej niż jeden żółw mogą się poruszyć przez rzucenie jednej karty. Korzysta z metody `throwCard`. Zwraca planszę do wyświetlenia na GUI.
-- `throwCard(player : Player, card : Card) : void`
-   Przyjmij zużytą kartę - gdy gracz odkłada/wykorzystuje kartę. Musi trafiać ona na stos zużytych (`trashCards`). Też zostaje ona zabrana z ręki gracza. Uaktualnia planszę.
+   Tworzy nową rundę dla kolejnego gracza. Jeśli gracz z kolejki nie ma pięciu kart, to mu ją dobiera.
+   Zwraca gracza, któremu dobrano (lub nie) kartkę. Sprawdza czy trzeba potasować karty ze stosu.
+   Zwraca gracza by wyświetlić jego aktualne karty i żółwia, którym operuje.
++ `makeMove(card : Card) : Board`
+   Wykonaj ruch – wykonuje ruch gracza.
+   Dostaje kartę od obecnie rozgrywającego gracza. Wykonuje jego ruch, zwraca zmodyfikowaną plansze po ruchu.
+   Inkrementuje kolejkę graczy (następne wywołanie `newRound` będzie dla kolejnego gracza) 
+   Bierze pod uwagę, że więcej niż jeden żółw mogą się poruszyć przez rzucenie jednej karty.
++ `getPoints() : Map<Integer, Integer>`
+   Zwraca strukturę przechowującą ID gracza oraz jego wynik w punktach. Wyniki trzeba ręcznie modyfikować pod stronie GUI.
 
-_Metody publiczne są wylistowane za pomocą "+", a prywatne "-"_
 
 ## **Modele:**
 
@@ -45,6 +48,8 @@ _Metody publiczne są wylistowane za pomocą "+", a prywatne "-"_
 ## Player
 Gracz posiadający kolorowego żółwia.
 ##### Atrybuty
+- `id : Integer`
+   Identyfikator gracza.
 - `card : List<Card>`
    Lista pięciu kart w ręce gracza. Karty mogą się powtarzać.
 - `turtle : Turtle`
@@ -55,7 +60,8 @@ Gracz posiadający kolorowego żółwia.
 Plansza.
 ##### Atrybuty
 - `fields : List<List<Turtle>>`
-   Lista wszystkich pól na planszy; każde pole ma listę żółwi, które na nim stoją. Trzeba ustalić ich sztywną liczbę np. 8. Musi też być pole początkowe, na którym żółtwi się nie stackuje.
+   Lista wszystkich pól na planszy; każde pole ma listę żółwi, które na nim stoją. 
+   Trzeba ustalić ich sztywną liczbę np. 8. Musi też być pole początkowe, na którym żółtwi się nie stackuje.
 
 
 ## Card

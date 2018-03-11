@@ -24,11 +24,12 @@ public class GameImpl implements Game {
 
     private Board board;
 
+    private List<Integer> playingOrder;
 
-    // todo lista z kolejnością graczy i ich losowanie
-    public GameImpl(List<String> names) {
-        players = createPlayers(names);
-        newGame();
+    private int currentPlaymaker;
+
+    public GameImpl(List<String> playerNames) {
+        players = createPlayers(playerNames);
         points = new HashMap<>();
         players.forEach(p -> points.put(p.getId(), 0));
     }
@@ -36,12 +37,15 @@ public class GameImpl implements Game {
     private List<List<Turtle>> createFields() {
         // todo zrobić fixed size list ograniczone FIELDS_NUMBER
         List<List<Turtle>> fields = new ArrayList<>(FIELDS_NUMBER);
-        fields.add(0, Arrays.asList(Turtle.values()));
+        fields.add(0, new ArrayList<>(Arrays.asList(Turtle.values())));
+        for (int i = 1; i < FIELDS_NUMBER; i++) {
+            fields.add(i, new ArrayList<>());
+        }
         return fields;
     }
 
     /**
-     * Tworzy talię 40 kart
+     * Creates deck of 40 cards.
      */
     private List<Card> createAvailableCards() {
         List<Card> cards = createCards();
@@ -50,7 +54,9 @@ public class GameImpl implements Game {
     }
 
     /**
-     * @return lista kart z każdym żółwiem i z każdą z liczb: -2, -1, 1, 2
+     * Returns 20 different cards of every possible card combination (turtle colour with a move).
+     *
+     * @return a list of cards with every turtle combined with each of the following numbers: -2, -1, 1, 2
      */
     private List<Card> createCards() {
         return IntStream.range(-2, 3)
@@ -69,13 +75,17 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public void newGame() {
+    public Board newGame() {
+        currentPlaymaker = 0;
         availableCards = createAvailableCards();
         trashCards = new ArrayList<>();
         board = new Board(createFields());
+        playingOrder = createPlayingOrder();
 
         Collections.shuffle(availableCards);            // miesza karty
-        players.forEach(p -> p.setCards(getDeck()));    // daje po 5 kart do łapki gracza
+        players.forEach(p -> p.setCards(new ArrayList<>(getDeck())));    // daje po 5 kart do łapki gracza
+
+        return board;
     }
 
     private List<Card> getDeck() {
@@ -85,27 +95,96 @@ public class GameImpl implements Game {
         return deck;
     }
 
-
-    @Override
-    public void resetGame() {
-        // todo
+    private List<Integer> createPlayingOrder() {
+        List<Integer> newPlayingOrder = players.stream().map(Player::getId).collect(Collectors.toList());
+        Collections.shuffle(newPlayingOrder);
+        return newPlayingOrder;
     }
 
     @Override
     public Player newRound() {
-        // todo
-        return null;
+        int playerIdForThisRound = playingOrder.get(currentPlaymaker);
+        shuffleCardsIfNoneAreAvailable();
+        getOneCard(players.get(playerIdForThisRound));
+
+        return players.get(playerIdForThisRound);
+    }
+
+    private void shuffleCardsIfNoneAreAvailable() {
+        if (availableCards.isEmpty()) {
+            Collections.shuffle(trashCards);
+            availableCards.addAll(trashCards);
+        }
+    }
+
+    private void getOneCard(Player player) {
+        if (player.getCards().size() < 5)
+            player.getCards().add(availableCards.remove(0));
     }
 
     @Override
-    public Board makeMove(Player player, Card card) {
-        // todo
-        return null;
+    public Board makeMove(Card card) {
+        if (!players.get(currentPlaymaker).getCards().contains(card)) {
+            System.out.println("PLAYER DOESN'T HAVE SUCH CARD");   // to powinien by wyjątek, może kiedyś, w wersji 2.0 nim będzie
+        }
+
+        Turtle turtleToBeMoved = card.getTurtle();
+        int moveDistance = card.getMove();
+        int turtleCurrentFieldIndex = getTurtleCurrentFieldIndex(turtleToBeMoved);
+        int turtleCurrentIndex = getTurtleCurrentIndex(turtleToBeMoved);
+
+        if (turtleCurrentFieldIndex + moveDistance < 0) {
+            System.out.println("FORBIDDEN MOVE");
+            throwCard(card);
+            return board;
+        }
+
+        if (turtleCurrentFieldIndex == 0) {
+            moveTurtleFromStartField(turtleToBeMoved, moveDistance);
+        } else {
+            moveTurtleWithOtherTurtles(moveDistance, turtleCurrentFieldIndex, turtleCurrentIndex);
+        }
+
+        throwCard(card);
+        currentPlaymaker = (++currentPlaymaker) % 5;
+
+        return board;
     }
 
-    @Override
-    public List<Player> getPlayers() {
-        return players;
+    private int getTurtleCurrentFieldIndex(Turtle turtleToBeMoved) {
+        return IntStream.range(0, board.getFields().size())
+                .boxed()
+                .filter(i -> board.getFields().get(i).indexOf(turtleToBeMoved) != -1)
+                .findFirst().get();
+    }
+
+    private void throwCard(Card card) {
+        trashCards.add(card);
+        players.get(currentPlaymaker).getCards().remove(card);  // fixme musi usuwać różne obiekty, ale o tych samych wartościach
+    }
+
+    private void moveTurtleWithOtherTurtles(int moveDistance, int turtleCurrentFieldIndex, int turtleCurrentIndex) {
+        int lastTurtleIndex = board.getFields().get(turtleCurrentFieldIndex).size();
+        List<Turtle> turtlesToBeMoved = board.getFields()
+                .get(turtleCurrentFieldIndex)
+                .subList(turtleCurrentIndex, lastTurtleIndex);
+        if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER) {
+            board.getFields().get(FIELDS_NUMBER - 1).addAll(turtlesToBeMoved);
+        } else {
+            board.getFields().get(moveDistance).addAll(turtlesToBeMoved);
+        }
+    }
+
+    private void moveTurtleFromStartField(Turtle turtleToBeMoved, int moveDistance) {
+        board.getFields().get(0).remove(turtleToBeMoved);
+        board.getFields().get(moveDistance).add(turtleToBeMoved);
+    }
+
+    private int getTurtleCurrentIndex(Turtle turtleToBeMoved) {
+        return board.getFields().stream()
+                .map(field -> field.indexOf(turtleToBeMoved))
+                .filter(index -> index != -1)
+                .findFirst().get();
     }
 
     @Override
@@ -113,18 +192,4 @@ public class GameImpl implements Game {
         return points;
     }
 
-    @Override
-    public List<Card> getAvailableCards() {
-        return availableCards;
-    }
-
-    @Override
-    public List<Card> getTrashCards() {
-        return trashCards;
-    }
-
-    @Override
-    public Board getBoard() {
-        return board;
-    }
 }
