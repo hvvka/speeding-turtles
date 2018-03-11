@@ -7,32 +7,33 @@ import java.awt.*;
 
 public class CardIcon {
 
-    private String path;
+    private StringBuilder path;
 
     public CardIcon(Card card){
-        this.path = "src/main/resources/turtle-icons/";
+        this.path = new StringBuilder("src/main/resources/turtle-icons/");
     }
 
     public ImageIcon paintCard(Card card){
 
         if(card.getMove() > 0){
-                this.path += "plus_";}
+                this.path.append("plus_").toString();}
         else {
-                this.path += "minus_";
+                this.path.append("minus_").toString();
         }
 
         if(Math.abs(card.getMove()) == 1){
-            this.path += "one_";
+            this.path.append("one_").toString();
         }
         else {
-            this.path += "two_";
+            this.path.append("two_").toString();
         }
 
-        this.path += card.getTurtle().toString().toLowerCase() + ".png";
+        this.path.append(card.getTurtle().toString().toLowerCase()).toString();
+        this.path.append(".png").toString();
 
-        ImageIcon imageIcon = new ImageIcon(this.path);
+        ImageIcon imageIcon = new ImageIcon(this.path.toString());
         Image image = imageIcon.getImage();
-        Image newimg = image.getScaledInstance(100, 160,  java.awt.Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(100, 160,  Image.SCALE_SMOOTH);
 
         return new ImageIcon(newimg);
         }

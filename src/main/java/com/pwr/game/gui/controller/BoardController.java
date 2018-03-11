@@ -6,7 +6,7 @@ import com.pwr.game.engine.model.Board;
 import com.pwr.game.engine.model.Card;
 import com.pwr.game.engine.model.Player;
 import com.pwr.game.engine.model.Turtle;
-import com.pwr.game.gui.view.MainFrame;
+import com.pwr.game.gui.view.BoardFrame;
 import com.pwr.game.gui.view.BoardView;
 import com.pwr.game.gui.view.ButtonPanel;
 
@@ -30,11 +30,10 @@ public class BoardController {
         this.player = game.newRound();
         this.boardView = new BoardView(board.getFields());
         this.buttonPanel = new ButtonPanel(player);
-        this.fields = board.getFields();
         this.board = board;
         this.game = game;
 
-        MainFrame mf = new MainFrame(boardView, buttonPanel);
+        BoardFrame mf = new BoardFrame(boardView, buttonPanel);
         showNextPlayer();
 
         initListeners(game);

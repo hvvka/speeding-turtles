@@ -15,7 +15,7 @@ public class BoardView extends JPanel {
     //współrzędne pierwszego pola na planszy
     //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    private int xStart = (int) (dimension.width/1.65);
+    private int xStart = (int) (dimension.width/7.5);
     private int yStart = (int) (dimension.height/1.6);
     private FieldIcon field;
     private Image imageIcon;
@@ -44,26 +44,26 @@ public class BoardView extends JPanel {
     public void paintBoardFields(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        int xTranslation = (int) (dimension.width/7.4);
-        int yTranslation = (int) (dimension.height/14);;
+        int xTranslation = (int) (dimension.width/9);
+        int yTranslation = (int) (dimension.height/16);;
         int x = xStart;
         int y = yStart;
 
         fieldsIcons = new ArrayList<FieldIcon>();
         field = new FieldIcon(x, y);
         fieldsIcons.add(field);
-        field.paintField(g, true);
+        field.paintFieldIcon(g, true);
 
         for (int i = 0; i < fields.size()-1; i++) {
-            x -= xTranslation;
+            x += xTranslation;
             y -= yTranslation;
 
             field = new FieldIcon(x, y);
-            field.paintField(g, false);
+            field.paintFieldIcon(g, false);
             fieldsIcons.add(field);
 
-            if(i%2 == 1){
-                xTranslation = -xTranslation;}
+//            if(i%3 == 1){
+//                xTranslation = -xTranslation;}
 
         }
     }
