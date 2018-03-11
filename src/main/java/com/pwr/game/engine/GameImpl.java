@@ -163,15 +163,16 @@ public class GameImpl implements Game {
     }
 
     private void moveTurtleWithOtherTurtles(int moveDistance, int turtleCurrentFieldIndex, int turtleCurrentIndex) {
-        int lastTurtleIndex = board.getFields().get(turtleCurrentFieldIndex).size();
+        int lastTurtleIndex = board.getFields().get(turtleCurrentFieldIndex).size() - 1;
         List<Turtle> turtlesToBeMoved = board.getFields()
                 .get(turtleCurrentFieldIndex)
-                .subList(turtleCurrentIndex, lastTurtleIndex);
+                .subList(turtleCurrentIndex, lastTurtleIndex + 1);
         if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER) {
             board.getFields().get(FIELDS_NUMBER - 1).addAll(turtlesToBeMoved);
         } else {
-            board.getFields().get(moveDistance).addAll(turtlesToBeMoved);
+            board.getFields().get(turtleCurrentFieldIndex + moveDistance).addAll(turtlesToBeMoved);
         }
+        turtlesToBeMoved.clear();
     }
 
     private void moveTurtleFromStartField(Turtle turtleToBeMoved, int moveDistance) {
