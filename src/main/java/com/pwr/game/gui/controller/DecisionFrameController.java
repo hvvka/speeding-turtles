@@ -1,6 +1,7 @@
 package com.pwr.game.gui.controller;
 
 import com.pwr.game.engine.Game;
+import com.pwr.game.engine.model.Player;
 import com.pwr.game.gui.view.DecisionFrame;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class DecisionFrameController {
 
     private final DecisionFrame decisionFrame;
     private final Game game;
+    private final Player lastWinner;
 
     private final String exitMessage = "Do zobaczenia przy następnej grze!";
 
@@ -19,9 +21,10 @@ public class DecisionFrameController {
     private JButton rankingResetButton;
     private JButton gameExitButton;
 
-    public DecisionFrameController(DecisionFrame decisionFrame, Game game) {
+    public DecisionFrameController(DecisionFrame decisionFrame, Game game, Player lastWinner) {
         this.decisionFrame = decisionFrame;
         this.game = game;
+        this.lastWinner = lastWinner;
 
         initComponents();
         initListeners();
@@ -36,7 +39,7 @@ public class DecisionFrameController {
 
         decisionFrame.createButtonsLabels();
         decisionFrame.createRankingTable(game);
-        decisionFrame.createCongratulationsLabel();
+        decisionFrame.createCongratulationsLabel(lastWinner);
     }
 
     private void initListeners() {
@@ -55,6 +58,4 @@ public class DecisionFrameController {
             System.exit(0);
         });
     }
-
-
 }

@@ -17,10 +17,10 @@ import java.util.Map;
  */
 public class DecisionFrame extends JFrame {
 
-    private static final int WIDTH = 600;
-    private static final int HEIGHT = 300;
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 500;
     private static final String decisionFrameTitle = "Ranking graczy";
-    private static final String congratulationsString = "Gratulacje";
+    private static final String congratulationsString = "Gratulacje wygrania ostatniej rundy";
     private static final String continueButtonText = "Kontynuuj";
     private static final String rankingResetButtonText = "Resetuj ranking";
     private static final String gameExitButtonText = "Zakończ grę";
@@ -74,17 +74,10 @@ public class DecisionFrame extends JFrame {
         buttonsPanel.revalidate();
     }
 
-    public void createCongratulationsLabel() {
+    public void createCongratulationsLabel(Player lastWinner) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(congratulationsString + ": ");
-        int maxPoints = (int) rankingTableData[0][1];
-        stringBuilder.append(rankingTableData[0][0]);
-        int i = 1;
-        while ((i < rankingTableData.length) && ((int) rankingTableData[i][1] == maxPoints)) {
-            stringBuilder.append(", ");
-            stringBuilder.append(rankingTableData[i][0]);
-            i++;
-        }
+        stringBuilder.append(congratulationsString + ", ");
+        stringBuilder.append(lastWinner.getTurtle());
         stringBuilder.append("!!!");
         congratulationsLabel.setText(stringBuilder.toString());
         congratulationsPanel.repaint();
