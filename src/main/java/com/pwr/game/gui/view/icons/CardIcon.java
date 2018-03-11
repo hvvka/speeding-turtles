@@ -10,7 +10,7 @@ public class CardIcon {
     private String path;
 
     public CardIcon(Card card){
-        this.path = "resources/";
+        this.path = "src/main/resources/turtle-icons/";
     }
 
     public ImageIcon paintCard(Card card){
@@ -30,7 +30,8 @@ public class CardIcon {
 
         this.path += card.getTurtle().toString().toLowerCase() + ".png";
 
-        ImageIcon imageIcon = new ImageIcon(TurtleIcon.class.getResource(this.path));
+//        ImageIcon imageIcon = new ImageIcon(TurtleIcon.class.getResource(this.path));
+        ImageIcon imageIcon = new ImageIcon(this.path);
         Image image = imageIcon.getImage();
         Image newimg = image.getScaledInstance(100, 160,  java.awt.Image.SCALE_SMOOTH);
 

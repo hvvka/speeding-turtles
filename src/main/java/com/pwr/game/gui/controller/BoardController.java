@@ -59,10 +59,10 @@ public class BoardController {
         buttonPanel.getButton5().addActionListener(buttonsListener);
     }
 
-//    public static void main(String[] args) {
-//        GameImpl game = new GameImpl(Arrays.asList("Pinky Pie", "Rainbow Dash", "Twigligh Sparkle", "Apple Jack", "Rarity"));
-//        BoardController boardController = new BoardController(game.newGame(), game);
-//    }
+    public static void main(String[] args) {
+        GameImpl game = new GameImpl(Arrays.asList("Pinky Pie", "Rainbow Dash", "Twigligh Sparkle", "Apple Jack", "Rarity"));
+        BoardController boardController = new BoardController(game.newGame(), game);
+    }
 }
 
 

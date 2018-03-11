@@ -40,7 +40,6 @@ public class BoardView extends JPanel {
 
         //maluje żówie na odpowiednich polach
         paintTurtlesOnFields(g, fields);
-
     }
 
 
@@ -99,7 +98,7 @@ public class BoardView extends JPanel {
 
     public BoardView(List<List<Turtle>> fields) {
         this.fields = fields;
-        imageIcon = new ImageIcon(TurtleIcon.class.getResource("resources/background.jpg")).getImage();
+        imageIcon = new ImageIcon("src/main/resources/turtle-icons/background.jpg").getImage();
         setFocusable(true);
 
     }
