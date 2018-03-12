@@ -15,8 +15,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-// TODO do utylizacji/napisać nowe, bardziej deterministyczne
-// testy tutaj są okropne, ale pomagają w debuggowaniu
 public class GameImplTest {
 
     private Game game;
