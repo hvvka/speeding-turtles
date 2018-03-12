@@ -2,11 +2,12 @@ package com.pwr.game.gui.view.icons;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class FieldIcon {
 
-    private static final String DEFAULT_FIELD_ICON_PATH = "src/main/resources/board-icons/field.png";
-    private static final String FINISH_FIELD_ICON_PATH = "src/main/resources/board-icons/field_finish.png";
+    private final URL DEFAULT_FIELD_ICON_PATH = getClass().getClassLoader().getResource("board-icons/field.png");
+    private final URL FINISH_FIELD_ICON_PATH = getClass().getClassLoader().getResource("board-icons/field_finish.png");
 
     private int x;
     private int y;
@@ -33,7 +34,7 @@ public class FieldIcon {
             image = new ImageIcon(FINISH_FIELD_ICON_PATH).getImage();
         }
 
-        g.drawImage(image, x - image.getWidth(null)/2, y - image.getHeight(null)/2, null);
+        g.drawImage(image, x - image.getWidth(null) / 2, y - image.getHeight(null) / 2, null);
     }
 }
 

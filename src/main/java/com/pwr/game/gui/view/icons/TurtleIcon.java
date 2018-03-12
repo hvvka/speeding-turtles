@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class TurtleIcon {
 
-    private static final String TURTLE_ICON_PATH = "src/main/resources/board-icons/turtle_";
+    private static final String TURTLE_ICON_PATH = "board-icons/turtle_";
 
     private int x;
     private int y;
@@ -23,7 +23,7 @@ public class TurtleIcon {
         path.append(turtle.toString().toLowerCase()).toString();
         path.append(".png").toString();
 
-        Image image = new ImageIcon(path.toString()).getImage();
+        Image image = new ImageIcon(getClass().getClassLoader().getResource(path.toString())).getImage();
 
         g.drawImage(image, x - image.getWidth(null) / 2, y - image.getHeight(null) / 2, null);
     }

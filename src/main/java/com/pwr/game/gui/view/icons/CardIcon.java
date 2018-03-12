@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class CardIcon {
 
-    private static final String CARD_ICON_PATH = "src/main/resources/cards-icons/";
+    private static final String CARD_ICON_PATH = "cards-icons/";
     private static final int DEFAULT_ICON_WIDTH = 100;
     private static final int DEFAULT_ICON_HEIGHT = 160;
 
@@ -33,7 +33,7 @@ public class CardIcon {
         path.append(card.getTurtle().toString().toLowerCase());
         path.append(".png");
 
-        ImageIcon imageIcon = new ImageIcon(path.toString());
+        ImageIcon imageIcon = new ImageIcon(getClass().getClassLoader().getResource(path.toString()));
         Image image = imageIcon.getImage();
         Image newImage = image.getScaledInstance(DEFAULT_ICON_WIDTH, DEFAULT_ICON_HEIGHT, Image.SCALE_SMOOTH);
 
