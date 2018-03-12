@@ -13,7 +13,6 @@ public class ButtonPanel extends JPanel {
     private JButton card3Button;
     private JButton card4Button;
     private JButton card5Button;
-    private JLabel currentPlayerLabel;
     private CardIcon cardIcon;
     private ButtonGroup buttons;
     private ArrayList<AbstractButton> listButtons;
@@ -58,7 +57,6 @@ public class ButtonPanel extends JPanel {
         buttons.add(card4Button);
         buttons.add(card5Button);
 
-        add(currentPlayerLabel);
         add(card1Button);
         card1Button.setName("0");
         add(card2Button);
@@ -81,4 +79,10 @@ public class ButtonPanel extends JPanel {
             listButtons.get(i).setIcon(cardIcon.paintCard(player.getCards().get(i)));
         }
     }
+    public void setButtonsInvisible(boolean isVisible){
+        for(int i = 0; i < listButtons.size(); i++) {
+            listButtons.get(i).setVisible(isVisible);
+        }
+    }
+
 }

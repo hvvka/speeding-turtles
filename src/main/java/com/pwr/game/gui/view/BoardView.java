@@ -50,20 +50,19 @@ public class BoardView extends JPanel {
         int y = yStart;
 
         fieldsIcons = new ArrayList<FieldIcon>();
-        field = new FieldIcon(x, y);
-        fieldsIcons.add(field);
-        field.paintFieldIcon(g, true);
 
-        for (int i = 0; i < fields.size()-1; i++) {
-            x += xTranslation;
-            y -= yTranslation;
+        for (int i = 0; i < fields.size(); i++) {
 
             field = new FieldIcon(x, y);
             field.paintFieldIcon(g, false);
             fieldsIcons.add(field);
 
-//            if(i%3 == 1){
-//                xTranslation = -xTranslation;}
+            x += xTranslation;
+            y -= yTranslation;
+            if(i == fields.size()-1){
+                field.paintFieldIcon(g, true);
+                fieldsIcons.add(field);
+            }
 
         }
     }
@@ -103,7 +102,7 @@ public class BoardView extends JPanel {
 
     public BoardView(List<List<Turtle>> fields) {
         this.fields = fields;
-        imageIcon = new ImageIcon("src/main/resources/board-icons/background.jpg").getImage();
+        imageIcon = new ImageIcon("src/main/resources/board-icons/background.png").getImage();
         setFocusable(true);
     }
 

@@ -23,9 +23,9 @@ public class BoardController {
     private ButtonPanel buttonPanel;
     private Player player;
     private Board board;
-    private GameImpl game;
+    private Game game;
 
-    public BoardController(Board board, GameImpl game){
+    public BoardController(Board board, Game game){
 
         this.player = game.newRound();
         this.boardView = new BoardView(board.getFields());
@@ -61,7 +61,6 @@ public class BoardController {
             boardView.repaint();
             buttonPanel.repaint();
 
-            isWinner();
         };
         buttonPanel.getCard1Button().addActionListener(buttonsListener);
         buttonPanel.getCard2Button().addActionListener(buttonsListener);
@@ -71,17 +70,12 @@ public class BoardController {
     }
 
     private void showNextPlayer(){
-        buttonPanel.setVisible(false);
+        buttonPanel.setButtonsInvisible(false);
         JOptionPane.showMessageDialog(new Frame(), "Kolejnym graczem jest " + player.getName());
-        buttonPanel.setVisible(true);
+        buttonPanel.setButtonsInvisible(true);
 
     }
 
-    private void isWinner(){
-        if(!board.getFields().get(game.FIELDS_NUMBER-1).isEmpty()){
-            JOptionPane.showMessageDialog(new Frame(), "Wygrał se ktoś");
-        }
-    }
 
     public static void main(String[] args) {
         GameImpl game = new GameImpl(Arrays.asList("Pinky Pie", "Rainbow Dash", "Twigligh Sparkle", "Apple Jack", "Rarity"));
