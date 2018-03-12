@@ -32,7 +32,7 @@ public class MainFrame extends JFrame {
     private JLabel playerFiveNameLabel;
 
     public MainFrame() {
-        super("Speeding–Turtles");
+        super("SpeedingTurtles");
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
         setContentPane(mainPanel);
         setLocationRelativeTo(null);

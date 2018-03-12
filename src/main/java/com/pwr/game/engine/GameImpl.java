@@ -138,7 +138,7 @@ public class GameImpl implements Game {
         int turtleCurrentFieldIndex = getTurtleCurrentFieldIndex(turtleToBeMoved);
         int turtleCurrentIndex = getTurtleCurrentIndex(turtleToBeMoved);
 
-        if (turtleCurrentFieldIndex + moveDistance < 0) {
+        if (turtleCurrentFieldIndex + moveDistance < 0 && turtleCurrentFieldIndex == 0) {
             System.out.println("FORBIDDEN MOVE");
         } else if (turtleCurrentFieldIndex == 0) {
             moveTurtleFromStartField(turtleToBeMoved, moveDistance);
@@ -172,6 +172,8 @@ public class GameImpl implements Game {
         if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER - 1) {
             board.getFields().get(FIELDS_NUMBER - 1).addAll(turtlesToBeMoved);
             addWinnerPoints();
+        } else if (turtleCurrentFieldIndex + moveDistance < 0) {
+            board.getFields().get(0).addAll(turtlesToBeMoved);
         } else {
             board.getFields().get(turtleCurrentFieldIndex + moveDistance).addAll(turtlesToBeMoved);
         }
