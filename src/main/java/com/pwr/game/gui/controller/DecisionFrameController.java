@@ -44,14 +44,12 @@ public class DecisionFrameController {
 
     private void initListeners() {
         continueButton.addActionListener(al -> {
-            //todo: uncomment after merge
-//            new BoardController(game.newGame(), game);
+            new BoardController(game.newGame(), game);
             decisionFrame.dispose();
         });
 
         rankingResetButton.addActionListener(al -> {
-            // todo: uncomment after merge
-//            new MainFrameController();
+            new MainFrameController();
             decisionFrame.dispose();
         });
 

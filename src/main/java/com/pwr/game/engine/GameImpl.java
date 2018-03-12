@@ -158,7 +158,8 @@ public class GameImpl implements Game {
 
     private void throwCard(Card card) {
         trashCards.add(card);
-        players.get(currentPlaymaker).getCards().remove(card);  // fixme musi usuwać różne obiekty, ale o tych samych wartościach
+        players.get(playingOrder.get(currentPlaymaker)).getCards().remove(card);  // fixme musi usuwać różne obiekty, ale o tych samych wartościach
+
     }
 
     private void moveTurtleWithOtherTurtles(int moveDistance, int turtleCurrentFieldIndex, int turtleCurrentIndex) {
@@ -196,6 +197,7 @@ public class GameImpl implements Game {
     }
 
     @Override
+    //TODO: Winning player dosn't have to be a current one
     public void winGame() {
         points.merge(playingOrder.get(currentPlaymaker), 1, (oldValue, one) -> oldValue + one);
     }

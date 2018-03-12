@@ -1,5 +1,6 @@
 package com.pwr.game.gui.view;
 
+
 import com.pwr.game.engine.GameImpl;
 import com.pwr.game.engine.model.Turtle;
 import com.pwr.game.gui.view.icons.FieldIcon;
@@ -14,9 +15,10 @@ public class BoardView extends JPanel {
 
     //współrzędne pierwszego pola na planszy
     //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
+
     Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
-    private int xStart = (int) (dimension.width/7.5);
-    private int yStart = (int) (dimension.height/1.6);
+    private int xStart = (int) (dimension.width / 7.5);
+    private int yStart = (int) (dimension.height / 1.6);
     private FieldIcon field;
     private Image imageIcon;
 
@@ -33,6 +35,8 @@ public class BoardView extends JPanel {
         super.paintComponent(g);
 
         g.drawImage(imageIcon, 0, 0, getWidth(), getHeight(), this);
+
+
         //zawsze maluje całą planszę
         paintBoardFields(g);
 
@@ -44,8 +48,10 @@ public class BoardView extends JPanel {
     public void paintBoardFields(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        int xTranslation = (int) (dimension.width/9);
-        int yTranslation = (int) (dimension.height/16);;
+
+        int xTranslation = (int) (dimension.width / 9);
+        int yTranslation = (int) (dimension.height / 16);
+        ;
         int x = xStart;
         int y = yStart;
 
@@ -59,10 +65,11 @@ public class BoardView extends JPanel {
 
             x += xTranslation;
             y -= yTranslation;
-            if(i == fields.size()-1){
+            if (i == fields.size() - 1) {
                 field.paintFieldIcon(g, true);
                 fieldsIcons.add(field);
             }
+
 
         }
     }
@@ -70,6 +77,7 @@ public class BoardView extends JPanel {
     //rysuje żółwie odpowiednio na polach
     public void paintTurtlesOnFields(Graphics g, List<List<Turtle>> fields) {
         Graphics2D g2d = (Graphics2D) g;
+
 
         for (int i = 0; i < GameImpl.FIELDS_NUMBER; i++) {
             if (i == 0) {
@@ -80,12 +88,13 @@ public class BoardView extends JPanel {
                 for (int j = 0; j < fields.get(i).size(); j++) {
                     TurtleIcon turtleIcon = new TurtleIcon(x, y);
                     turtleIcon.paintTurtleIcon(g, fields.get(i).get(j));
-                    if(j != 2){
+                    if (j != 2) {
                         x += 35;
-                        y += 15;}
-                        else{
+                        y += 15;
+                    } else {
                         x = fieldsIcons.get(i).getX() - 30;
                     }
+
                 }
             } else {
                 int x = fieldsIcons.get(i).getX();
@@ -93,12 +102,14 @@ public class BoardView extends JPanel {
 
                 for (int j = 0; j < fields.get(i).size(); j++) {
                     TurtleIcon turtleIcon = new TurtleIcon(x, y);
+
                     turtleIcon.paintTurtleIcon(g, fields.get(i).get(j));
                     y -= 15;
                 }
             }
         }
     }
+
 
     public BoardView(List<List<Turtle>> fields) {
         this.fields = fields;
@@ -107,3 +118,4 @@ public class BoardView extends JPanel {
     }
 
 }
+
