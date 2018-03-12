@@ -18,6 +18,8 @@ import java.util.List;
 class BoardController {
 
     private static final String NEXT_PLAYER_MESSAGE = "Kolejnym graczem jest ";
+    private static final String WINNER_MESSAGE1 = "Zwycięzcą jest ";
+    private static final String WINNER_MESSAGE2 = "\nGratulujemy!";
 
     private BoardView boardView;
     private ButtonPanel buttonPanel;
@@ -43,12 +45,12 @@ class BoardController {
             Card card = player.getCards().get(Integer.parseInt(button.getName()));
 
             List<List<Turtle>> fields = game.makeMove(card).getFields();
-            winnerCheck(fields.get(fields.size() - 1));
             boardView.setFields(fields);
             player = game.newRound();
             buttonPanel.setButtonImages(player);
 
-            showNextPlayer();
+            if(!winnerCheck(fields.get(fields.size() - 1))){
+                showNextPlayer();}
 
             boardView.repaint();
             buttonPanel.repaint();
@@ -67,11 +69,13 @@ class BoardController {
         buttonPanel.setButtonsInvisible(true);
     }
 
-    private void winnerCheck(List<Turtle> lastField) {
-        if (lastField.isEmpty()) return;
+    private boolean winnerCheck(List<Turtle> lastField) {
+        if (lastField.isEmpty()) return false;
         player = game.winGame();
+        JOptionPane.showMessageDialog(new Frame(), WINNER_MESSAGE1 + player.getName() + WINNER_MESSAGE2);
         new DecisionFrameController(new DecisionFrame(), game, player);
         boardFrame.dispose();
+        return true;
     }
 }
 
