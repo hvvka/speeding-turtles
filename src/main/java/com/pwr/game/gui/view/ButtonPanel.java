@@ -9,15 +9,13 @@ import java.util.Collections;
 
 public class ButtonPanel extends JPanel {
 
+    private ArrayList<AbstractButton> listButtons;
+
     private JButton card1Button;
     private JButton card2Button;
     private JButton card3Button;
     private JButton card4Button;
     private JButton card5Button;
-
-    private CardIcon cardIcon;
-    private ButtonGroup buttons;
-    private ArrayList<AbstractButton> listButtons;
 
     public JButton getCard1Button() {
         return card1Button;
@@ -45,7 +43,7 @@ public class ButtonPanel extends JPanel {
     }
 
     private void setButtonList() {
-        buttons = new ButtonGroup();
+        ButtonGroup buttons = new ButtonGroup();
 
         buttons.add(card1Button);
         buttons.add(card2Button);
@@ -69,7 +67,7 @@ public class ButtonPanel extends JPanel {
 
     public void setButtonImages(Player player){
         for(int i = 0; i < player.getCards().size(); i++) {
-            cardIcon = new CardIcon();
+            CardIcon cardIcon = new CardIcon();
             listButtons.get(i).setIcon(cardIcon.paintCard(player.getCards().get(i)));
         }
     }

@@ -19,24 +19,24 @@ public class CardIcon {
 
     public ImageIcon paintCard(Card card) {
         if (card.getMove() > 0) {
-            path.append("plus_").toString();
+            path.append("plus_");
         } else {
-            path.append("minus_").toString();
+            path.append("minus_");
         }
 
-        if(Math.abs(card.getMove()) == 1){
-            path.append("one_").toString();
+        if (Math.abs(card.getMove()) == 1) {
+            path.append("one_");
         } else {
-            path.append("two_").toString();
+            path.append("two_");
         }
 
-        path.append(card.getTurtle().toString().toLowerCase()).toString();
-        path.append(".png").toString();
+        path.append(card.getTurtle().toString().toLowerCase());
+        path.append(".png");
 
         ImageIcon imageIcon = new ImageIcon(path.toString());
         Image image = imageIcon.getImage();
-        Image newimg = image.getScaledInstance(DEFAULT_ICON_WIDTH, DEFAULT_ICON_HEIGHT, Image.SCALE_SMOOTH);
+        Image newImage = image.getScaledInstance(DEFAULT_ICON_WIDTH, DEFAULT_ICON_HEIGHT, Image.SCALE_SMOOTH);
 
-        return new ImageIcon(newimg);
+        return new ImageIcon(newImage);
     }
 }
