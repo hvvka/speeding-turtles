@@ -14,6 +14,8 @@ public class GameImpl implements Game {
 
     public static final int FIELDS_NUMBER = 8;
 
+    private static final int PLAYERS_NUMBER = 5;
+
     private List<Player> players;
 
     private Map<Integer, Integer> points;
@@ -35,9 +37,9 @@ public class GameImpl implements Game {
     }
 
     private List<List<Turtle>> createFields() {
-        // todo zrobić fixed size list ograniczone FIELDS_NUMBER
         List<List<Turtle>> fields = new ArrayList<>(FIELDS_NUMBER);
         fields.add(0, new ArrayList<>(Arrays.asList(Turtle.values())));
+
         for (int i = 1; i < FIELDS_NUMBER; i++) {
             fields.add(i, new ArrayList<>());
         }
@@ -89,7 +91,7 @@ public class GameImpl implements Game {
     }
 
     private List<Card> getDeck() {
-        List<Card> sublist = availableCards.subList(0, 5);
+        List<Card> sublist = availableCards.subList(0, PLAYERS_NUMBER);
         List<Card> deck = new ArrayList<>(sublist);
         sublist.clear();
         return deck;
@@ -118,13 +120,13 @@ public class GameImpl implements Game {
     }
 
     private void getOneCard(Player player) {
-        if (player.getCards().size() < 5)
+        if (player.getCards().size() < PLAYERS_NUMBER)
             player.getCards().add(availableCards.remove(0));
     }
 
     @Override
     public Board makeMove(Card card) {
-        if (!players.get(currentPlaymaker).getCards().contains(card)) {
+        if (!players.get(playingOrder.get(currentPlaymaker)).getCards().contains(card)) {
             System.out.println("PLAYER DOESN'T HAVE SUCH CARD");   // to powinien by wyjątek, może kiedyś, w wersji 2.0 nim będzie
         }
 
@@ -135,18 +137,14 @@ public class GameImpl implements Game {
 
         if (turtleCurrentFieldIndex + moveDistance < 0) {
             System.out.println("FORBIDDEN MOVE");
-            throwCard(card);
-            return board;
-        }
-
-        if (turtleCurrentFieldIndex == 0) {
+        } else if (turtleCurrentFieldIndex == 0) {
             moveTurtleFromStartField(turtleToBeMoved, moveDistance);
         } else {
             moveTurtleWithOtherTurtles(moveDistance, turtleCurrentFieldIndex, turtleCurrentIndex);
         }
 
         throwCard(card);
-        currentPlaymaker = (++currentPlaymaker) % 5;
+        currentPlaymaker = (++currentPlaymaker) % PLAYERS_NUMBER;
 
         return board;
     }
@@ -160,19 +158,21 @@ public class GameImpl implements Game {
 
     private void throwCard(Card card) {
         trashCards.add(card);
-        players.get(currentPlaymaker).getCards().remove(card);  // fixme musi usuwać różne obiekty, ale o tych samych wartościach
+        players.get(playingOrder.get(currentPlaymaker)).getCards().remove(card);  // fixme musi usuwać różne obiekty, ale o tych samych wartościach
+
     }
 
     private void moveTurtleWithOtherTurtles(int moveDistance, int turtleCurrentFieldIndex, int turtleCurrentIndex) {
-        int lastTurtleIndex = board.getFields().get(turtleCurrentFieldIndex).size();
+        int lastTurtleIndex = board.getFields().get(turtleCurrentFieldIndex).size() - 1;
         List<Turtle> turtlesToBeMoved = board.getFields()
                 .get(turtleCurrentFieldIndex)
-                .subList(turtleCurrentIndex, lastTurtleIndex);
-        if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER) {
+                .subList(turtleCurrentIndex, lastTurtleIndex + 1);
+        if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER - 1) {
             board.getFields().get(FIELDS_NUMBER - 1).addAll(turtlesToBeMoved);
         } else {
-            board.getFields().get(moveDistance).addAll(turtlesToBeMoved);
+            board.getFields().get(turtleCurrentFieldIndex + moveDistance).addAll(turtlesToBeMoved);
         }
+        turtlesToBeMoved.clear();
     }
 
     private void moveTurtleFromStartField(Turtle turtleToBeMoved, int moveDistance) {
@@ -188,8 +188,17 @@ public class GameImpl implements Game {
     }
 
     @Override
-    public Map<Integer, Integer> getPoints() {
-        return points;
+    public Map<Player, Integer> getResult() {
+        Map<Player, Integer> playersResult = new HashMap<>();
+        for (int i = 0; i < PLAYERS_NUMBER; i++)
+            playersResult.put(players.get(i), points.get(i));
+
+        return playersResult;
     }
 
+    @Override
+    //TODO: Winning player dosn't have to be a current one
+    public void winGame() {
+        points.merge(playingOrder.get(currentPlaymaker), 1, (oldValue, one) -> oldValue + one);
+    }
 }

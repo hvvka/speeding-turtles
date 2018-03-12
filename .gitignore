@@ -46,3 +46,4 @@ gen/
 *.jar
 *.war
 *.ear
+/.nb-gradle/

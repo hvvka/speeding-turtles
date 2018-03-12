@@ -25,25 +25,26 @@ public class MainFrameController {
     }
 
     private void initListeners() {
-        startButton.addActionListener( ae -> {
+        startButton.addActionListener(ae -> {
             Game game = new GameImpl(getAllPlayerNames());
             Board board = game.newGame();
-            //TODO create boardController, think what references it should keep
+            new BoardController(board, game);
+            mainFrame.dispose();
         });
     }
 
-    private List<String> getAllPlayerNames(){
+    private List<String> getAllPlayerNames() {
         List<String> playerNames = new ArrayList<>();
-        String playerOneName   = playerOneTextField.getText();
-        String playerTwoName   = playerTwoTextField.getText();
+        String playerOneName = playerOneTextField.getText();
+        String playerTwoName = playerTwoTextField.getText();
         String playerThreeName = playerThreeTextField.getText();
-        String playerFourName  = playerFourTextField.getText();
-        String playerFiveName  = playerFiveTextField.getText();
-        if(playerOneName.equals(""))   playerOneName   = "Fluttershy";
-        if(playerTwoName.equals(""))   playerTwoName   = "Rainbow Dash";
-        if(playerThreeName.equals("")) playerThreeName = "Big Macintosh";
-        if(playerFourName.equals(""))  playerFourName  = "Green Jewel";
-        if(playerFiveName.equals(""))  playerFiveName  = "Twilight Sparkle";
+        String playerFourName = playerFourTextField.getText();
+        String playerFiveName = playerFiveTextField.getText();
+        if (playerOneName.equals("")) playerOneName = "Fluttershy";
+        if (playerTwoName.equals("")) playerTwoName = "Rainbow Dash";
+        if (playerThreeName.equals("")) playerThreeName = "Big Macintosh";
+        if (playerFourName.equals("")) playerFourName = "Green Jewel";
+        if (playerFiveName.equals("")) playerFiveName = "Twilight Sparkle";
         playerNames.add(playerOneName);
         playerNames.add(playerTwoName);
         playerNames.add(playerThreeName);
@@ -57,10 +58,10 @@ public class MainFrameController {
         mainFrame.setVisible(true);
 
         startButton = mainFrame.getStartButton();
-        playerOneTextField = mainFrame.getTextFieldPlayerOneName();
-        playerTwoTextField = mainFrame.getTextFieldPlayerTwoName();
-        playerThreeTextField = mainFrame.getTextFieldPlayerThreeName();
-        playerFourTextField = mainFrame.getTextFieldPlayerFourName();
-        playerFiveTextField = mainFrame.getTextFieldPlayerFiveName();
+        playerOneTextField = mainFrame.getPlayerOneNameTextField();
+        playerTwoTextField = mainFrame.getPlayerTwoNameTextField();
+        playerThreeTextField = mainFrame.getPlayerThreeNameTextField();
+        playerFourTextField = mainFrame.getPlayerFourNameTextField();
+        playerFiveTextField = mainFrame.getPlayerFiveNameTextField();
     }
 }

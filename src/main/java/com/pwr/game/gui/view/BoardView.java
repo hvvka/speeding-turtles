@@ -1,64 +1,76 @@
 package com.pwr.game.gui.view;
 
-/*
+
+import com.pwr.game.engine.GameImpl;
 import com.pwr.game.engine.model.Turtle;
-//import com.pwr.game.gui.MainFrame;
-import com.pwr.game.gui.controller.BoardController;
+import com.pwr.game.gui.view.icons.FieldIcon;
+import com.pwr.game.gui.view.icons.TurtleIcon;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArayList;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BoardView extends JPanel {
 
     //współrzędne pierwszego pola na planszy
     //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
-    private int xStart = 680;
-    private int yStart = 630;
 
-    private Field field;
-    private BoardController boardController;
-    private List<Turtle> turtles;
+    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    private int xStart = (int) (dimension.width / 7.5);
+    private int yStart = (int) (dimension.height / 1.6);
+    private FieldIcon field;
+    private Image imageIcon;
 
-    private static List<Field> fieldsIcons;
+    private List<List<Turtle>> fields;
+    private List<FieldIcon> fieldsIcons;
 
+    public void setFields(List<List<Turtle>> fields) {
+        this.fields = fields;
+    }
 
     //metoda wywoływana jak trzeba przerysować ekran
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+
+        g.drawImage(imageIcon, 0, 0, getWidth(), getHeight(), this);
+
+
         //zawsze maluje całą planszę
         paintBoardFields(g);
 
         //maluje żówie na odpowiednich polach
-        paintTurtlesOnFields(g, boardController.getFields());
-
+        paintTurtlesOnFields(g, fields);
     }
 
 
     public void paintBoardFields(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
 
-        int xTranslation = 200;
-        int yTranslation = 70;
+
+        int xTranslation = (int) (dimension.width / 9);
+        int yTranslation = (int) (dimension.height / 16);
+        ;
         int x = xStart;
         int y = yStart;
 
-        fieldsIcons = new ArrayList<Field>();
-        field = new Field(x, y);
-        fieldsIcons.add(field);
-        field.paintField(g, true);
+        fieldsIcons = new ArrayList<FieldIcon>();
 
-        for (int i = 0; i < 8; i++) {
-            x -= xTranslation;
-            y -= yTranslation;
+        for (int i = 0; i < fields.size(); i++) {
 
-            field = new Field(x, y);
-            field.paintField(g, false);
+            field = new FieldIcon(x, y);
+            field.paintFieldIcon(g, false);
             fieldsIcons.add(field);
 
-            xTranslation = -xTranslation;
+            x += xTranslation;
+            y -= yTranslation;
+            if (i == fields.size() - 1) {
+                field.paintFieldIcon(g, true);
+                fieldsIcons.add(field);
+            }
+
+
         }
     }
 
@@ -66,16 +78,23 @@ public class BoardView extends JPanel {
     public void paintTurtlesOnFields(Graphics g, List<List<Turtle>> fields) {
         Graphics2D g2d = (Graphics2D) g;
 
-        for (int i = 0; i < fields.size(); i++) {
+
+        for (int i = 0; i < GameImpl.FIELDS_NUMBER; i++) {
             if (i == 0) {
 
-                int x = fieldsIcons.get(i).getX() - 60;
-                int y = fieldsIcons.get(i).getY();
+                int x = fieldsIcons.get(i).getX() - 30;
+                int y = fieldsIcons.get(i).getY() - 40;
 
                 for (int j = 0; j < fields.get(i).size(); j++) {
                     TurtleIcon turtleIcon = new TurtleIcon(x, y);
-                    turtleIcon.paintTurtle(g, fields.get(i).get(j));
-                    x += 30;
+                    turtleIcon.paintTurtleIcon(g, fields.get(i).get(j));
+                    if (j != 2) {
+                        x += 35;
+                        y += 15;
+                    } else {
+                        x = fieldsIcons.get(i).getX() - 30;
+                    }
+
                 }
             } else {
                 int x = fieldsIcons.get(i).getX();
@@ -83,32 +102,20 @@ public class BoardView extends JPanel {
 
                 for (int j = 0; j < fields.get(i).size(); j++) {
                     TurtleIcon turtleIcon = new TurtleIcon(x, y);
-                    turtleIcon.paintTurtle(g, fields.get(i).get(j));
-                    y -= 10;
+
+                    turtleIcon.paintTurtleIcon(g, fields.get(i).get(j));
+                    y -= 15;
                 }
             }
         }
     }
 
 
-    public BoardView() {
-        this.boardController = new BoardController();
-
-
+    public BoardView(List<List<Turtle>> fields) {
+        this.fields = fields;
+        imageIcon = new ImageIcon("src/main/resources/board-icons/background.png").getImage();
+        setFocusable(true);
     }
 
-    public static void main(String[] args) {
-//        żeby dodać ten panel do frame'u rekomendowane jest
-//        dodanie go w następujący sposób (bo inaczej nie bedzie śmigać rysowanie):
-//        BoardView board = new BoardView();
-//        board.setFocusable(true);
-//        board.setLayout(new FlowLayout());
-//        setContentPane(board);
-//        setVisible(true);
-
-
-//        MainFrame mf = new MainFrame();
-
-    }
 }
-*/
+
