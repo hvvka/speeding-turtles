@@ -2,13 +2,16 @@ package com.pwr.game.gui.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 
 public class MainFrame extends JFrame {
 
     private static final int FRAME_WIDTH = 500;
     private static final int FRAME_HEIGHT = 500;
 
-    private static final String LOGO_PATH = "resources/applogo.png";
+    private final URL LOGO_PATH = getClass().getClassLoader().getResource("applogo.png");
     private static final int LOGO_WIDTH = 490;
     private static final int LOGO_HEIGHT = 245;
 
@@ -34,6 +37,7 @@ public class MainFrame extends JFrame {
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        System.out.println(LOGO_PATH);
         logoLabel.setIcon(new ImageIcon(new ImageIcon(LOGO_PATH)
                 .getImage()
                 .getScaledInstance(LOGO_WIDTH, LOGO_HEIGHT, Image.SCALE_SMOOTH)));

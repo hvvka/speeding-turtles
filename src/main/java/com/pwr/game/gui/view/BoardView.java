@@ -8,12 +8,13 @@ import com.pwr.game.gui.view.icons.TurtleIcon;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class BoardView extends JPanel {
 
-    private static final String BACKROUND_PATH = "src/main/resources/board-icons/background.png";
+    private final URL BACKROUND_PATH = getClass().getClassLoader().getResource("board-icons/background.png");
 
     //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
     private Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();

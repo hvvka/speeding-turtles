@@ -7,10 +7,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author zlakomiak226190
@@ -25,7 +23,7 @@ public class DecisionFrame extends JFrame {
     private static final String CONTINUE_BUTTON_TEXT = "Kontynuuj";
     private static final String RANKING_RESET_BUTTON_TEXT = "Resetuj ranking";
     private static final String GAME_EXIT_BUTTON_TEXT = "Zakończ grę";
-    private static final String[] RANKING_TABLE_COLUMN_NAMES = {"Gracz", "Liczba punktów"};
+    private static final String[] RANKING_TABLE_COLUMN_NAMES = {"Gracz", "Kolor", "Liczba punktów"};
 
     private JPanel decisionFramePanel;
 
@@ -71,7 +69,7 @@ public class DecisionFrame extends JFrame {
 
     public void createCongratulationsLabel(Player lastWinner) {
         String stringBuilder = (CONGRATULATIONS_STRING + ", ") +
-                lastWinner.getTurtle() +
+                lastWinner.getName() +
                 "!!!";
         congratulationsLabel.setText(stringBuilder);
         congratulationsPanel.repaint();
@@ -80,16 +78,17 @@ public class DecisionFrame extends JFrame {
 
     public void createRankingTable(Game game) {
         Map<Player, Integer> points = game.getResult();
-        Object[][] rankingTableData = new Object[points.size()][2];
+        Object[][] rankingTableData = new Object[points.size()][3];
         Map<Player, Integer> sortedPoints = MapUtil.sortByValue(points);
         int i = 0;
         for (Map.Entry<Player, Integer> entry : sortedPoints.entrySet()) {
-            rankingTableData[i][0] = entry.getKey().getTurtle();
-            rankingTableData[i][1] = entry.getValue();
+            rankingTableData[i][0] = entry.getKey().getName();
+            rankingTableData[i][1] = entry.getKey().getTurtle();
+            rankingTableData[i][2] = entry.getValue();
             i++;
         }
         JTable rankingTable = new JTable(new DefaultTableModel(rankingTableData, RANKING_TABLE_COLUMN_NAMES));
-        rankingTable.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
+        rankingTable.getColumnModel().getColumn(1).setCellRenderer(new CustomRenderer());
         rankingTableScrollPane.setViewportView(rankingTable);
         rankingPanel.repaint();
         rankingPanel.revalidate();
@@ -122,19 +121,24 @@ class CustomRenderer extends DefaultTableCellRenderer {
         String description = table.getValueAt(row, column).toString();
 
         if ("YELLOW".equals(description)) {
-            cellComponent.setBackground(new Color(249,255,195));
+            cellComponent.setBackground(new Color(249, 255, 195));
+            cellComponent.setForeground(new Color(249, 255, 195));
 
         } else if ("BLUE".equals(description)) {
-            cellComponent.setBackground(new Color(186,209,255));
+            cellComponent.setBackground(new Color(186, 209, 255));
+            cellComponent.setForeground(new Color(186, 209, 255));
 
         } else if ("RED".equals(description)) {
-            cellComponent.setBackground(new Color(255,201,189));
+            cellComponent.setBackground(new Color(255, 201, 189));
+            cellComponent.setForeground(new Color(255, 201, 189));
 
         } else if ("GREEN".equals(description)) {
-            cellComponent.setBackground(new Color(187,255,189));
+            cellComponent.setBackground(new Color(187, 255, 189));
+            cellComponent.setForeground(new Color(187, 255, 189));
 
         } else if ("PURPLE".equals(description)) {
-            cellComponent.setBackground(new Color(239,193,255));
+            cellComponent.setBackground(new Color(239, 193, 255));
+            cellComponent.setForeground(new Color(239, 193, 255));
         }
 
         return cellComponent;

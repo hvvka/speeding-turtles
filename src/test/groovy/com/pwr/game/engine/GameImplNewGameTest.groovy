@@ -60,7 +60,7 @@ class GameImplNewGameTest extends Specification {
     }
 
     @Unroll
-    def "player #id has #points points"() {
+    def "player #id has #expectedPoints points"() {
         given:
         game.newGame()
         Field field = game.getClass().getDeclaredField("points")
