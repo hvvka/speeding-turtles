@@ -39,6 +39,7 @@ public class GameImpl implements Game {
     private List<List<Turtle>> createFields() {
         List<List<Turtle>> fields = new ArrayList<>(FIELDS_NUMBER);
         fields.add(0, new ArrayList<>(Arrays.asList(Turtle.values())));
+
         for (int i = 1; i < FIELDS_NUMBER; i++) {
             fields.add(i, new ArrayList<>());
         }
