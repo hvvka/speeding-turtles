@@ -25,6 +25,12 @@ public class FieldIcon {
         return y;
     }
 
+    /**
+     * Prints field icon on BoardView
+     * @param g Graphics
+     * @param last boolean
+     * Based on last it decides which icon to print
+     */
     public void paintFieldIcon(Graphics g, boolean last) {
         Image image;
 

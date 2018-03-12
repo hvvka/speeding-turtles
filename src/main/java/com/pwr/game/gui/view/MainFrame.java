@@ -31,6 +31,9 @@ public class MainFrame extends JFrame {
     private JLabel playerFourNameLabel;
     private JLabel playerFiveNameLabel;
 
+    /**
+     *  Default constructor of MainFrame, it sets height,width and applogo for that frame
+     */
     public MainFrame() {
         super("SpeedingTurtles");
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -43,14 +46,26 @@ public class MainFrame extends JFrame {
                 .getScaledInstance(LOGO_WIDTH, LOGO_HEIGHT, Image.SCALE_SMOOTH)));
     }
 
+    /**
+     *
+     * @return startButton
+     */
     public JButton getStartButton() {
         return startButton;
     }
 
+    /**
+     *
+     * @return playerOneNameTextField
+     */
     public JTextField getPlayerOneNameTextField() {
         return playerOneNameTextField;
     }
 
+    /**
+     *
+     * @return playerTwoNameTextField
+     */
     public JTextField getPlayerTwoNameTextField() {
         return playerTwoNameTextField;
     }

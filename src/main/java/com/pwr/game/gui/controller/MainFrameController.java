@@ -19,6 +19,10 @@ public class MainFrameController {
     private JTextField playerFiveTextField;
     private JButton startButton;
 
+    /**
+     * Default constuctor for MainFrameControler,
+     * it set ups MainFrame and listeners for its components
+     */
     public MainFrameController() {
         initComponents();
         initListeners();

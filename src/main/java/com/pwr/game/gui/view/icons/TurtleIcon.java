@@ -19,6 +19,11 @@ public class TurtleIcon {
         path = new StringBuilder(TURTLE_ICON_PATH);
     }
 
+    /**
+     * Prints turtle on field
+     * @param g
+     * @param turtle
+     */
     public void paintTurtleIcon(Graphics g, Turtle turtle) {
         path.append(turtle.toString().toLowerCase()).toString();
         path.append(".png").toString();

@@ -27,6 +27,12 @@ class BoardController {
     private Game game;
     private BoardFrame boardFrame;
 
+    /**
+     * Default constuctor of BoardController it takes
+     * @param board Board returned by game engine
+     * @param game Game engine
+     * as parameters, and creates BoardFrame, and sets up  listeners for all components
+     */
     BoardController(Board board, Game game) {
         this.player = game.newRound();
         this.boardView = new BoardView(board.getFields());
@@ -38,6 +44,10 @@ class BoardController {
         initListeners(game);
     }
 
+    /**
+     * Initializes listeners for BoardFrame buttons
+     * @param game takes Game engine as parameter to make move based on card used
+     */
     private void initListeners(Game game) {
         ActionListener buttonsListener = actionEvent -> {
 

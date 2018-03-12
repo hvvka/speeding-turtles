@@ -24,6 +24,13 @@ class DecisionFrameController {
     private JButton rankingResetButton;
     private JButton gameExitButton;
 
+    /**
+     * Default DecisionFrameController, it takes
+     * @param decisionFrame new DecisionFrame
+     * @param game Game engine
+     * @param lastWinner player which won last round
+     * as parameters and set ups listeners and labels a for components on DecisionFrame
+     */
     DecisionFrameController(DecisionFrame decisionFrame, Game game, Player lastWinner) {
         this.decisionFrame = decisionFrame;
         this.game = game;

@@ -17,6 +17,11 @@ public class CardIcon {
         path = new StringBuilder(CARD_ICON_PATH);
     }
 
+    /**
+     * Retunrs icon with card to be set up on buttons on ButtonPanel
+     * @param card
+     * @return ImageIcon
+     */
     public ImageIcon paintCard(Card card) {
         if (card.getMove() > 0) {
             path.append("plus_");
