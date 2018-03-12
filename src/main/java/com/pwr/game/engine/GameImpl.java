@@ -171,15 +171,15 @@ public class GameImpl implements Game {
                 .subList(turtleCurrentIndex, lastTurtleIndex + 1);
         if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER - 1) {
             board.getFields().get(FIELDS_NUMBER - 1).addAll(turtlesToBeMoved);
-            addWinnerPoints(turtleCurrentFieldIndex, turtleCurrentIndex);
+            addWinnerPoints();
         } else {
             board.getFields().get(turtleCurrentFieldIndex + moveDistance).addAll(turtlesToBeMoved);
         }
         turtlesToBeMoved.clear();
     }
 
-    private void addWinnerPoints(int turtleCurrentFieldIndex, int turtleCurrentIndex) {
-        Turtle winnerTurtle = board.getFields().get(turtleCurrentFieldIndex).get(turtleCurrentIndex);
+    private void addWinnerPoints() {
+        Turtle winnerTurtle = board.getFields().get(FIELDS_NUMBER - 1).get(0);
         winnerId = players.stream()
                 .filter(player -> player.getTurtle().equals(winnerTurtle))
                 .findFirst().get()
