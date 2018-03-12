@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ButtonPanel extends JPanel {
+
     private JButton card1Button;
     private JButton card2Button;
     private JButton card3Button;
     private JButton card4Button;
     private JButton card5Button;
+
     private CardIcon cardIcon;
     private ButtonGroup buttons;
     private ArrayList<AbstractButton> listButtons;
@@ -37,18 +39,12 @@ public class ButtonPanel extends JPanel {
         return card5Button;
     }
 
-    public ArrayList<AbstractButton> getListButtons() {
-        return listButtons;
-    }
-
     public ButtonPanel(Player player){
         setButtonList();
         setButtonImages(player);
     }
 
-
-    private void setButtonList(){
-
+    private void setButtonList() {
         buttons = new ButtonGroup();
 
         buttons.add(card1Button);
@@ -69,20 +65,17 @@ public class ButtonPanel extends JPanel {
         card5Button.setName("4");
 
         listButtons = Collections.list(buttons.getElements());
-
     }
 
     public void setButtonImages(Player player){
-
         for(int i = 0; i < player.getCards().size(); i++) {
             cardIcon = new CardIcon();
             listButtons.get(i).setIcon(cardIcon.paintCard(player.getCards().get(i)));
         }
     }
     public void setButtonsInvisible(boolean isVisible){
-        for(int i = 0; i < listButtons.size(); i++) {
-            listButtons.get(i).setVisible(isVisible);
+        for (AbstractButton listButton : listButtons) {
+            listButton.setVisible(isVisible);
         }
     }
-
 }
