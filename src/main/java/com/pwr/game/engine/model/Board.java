@@ -14,10 +14,6 @@ public class Board {
         return fields;
     }
 
-    public void setFields(List<List<Turtle>> fields) {
-        this.fields = fields;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -75,7 +75,7 @@ public class ButtonPanel extends JPanel {
     public void setButtonImages(Player player){
 
         for(int i = 0; i < player.getCards().size(); i++) {
-            cardIcon = new CardIcon(player.getCards().get(i));
+            cardIcon = new CardIcon();
             listButtons.get(i).setIcon(cardIcon.paintCard(player.getCards().get(i)));
         }
     }

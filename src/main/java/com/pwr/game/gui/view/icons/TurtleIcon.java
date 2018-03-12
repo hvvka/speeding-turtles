@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TurtleIcon {
+
+    private static final String TURTLE_ICON_PATH = "src/main/resources/board-icons/turtle_";
+
     private int x;
     private int y;
     private StringBuilder path;
@@ -13,16 +16,14 @@ public class TurtleIcon {
     public TurtleIcon(int x, int y) {
         this.x = x;
         this.y = y;
-        this.path =  new StringBuilder("src/main/resources/board-icons/turtle_");
+        path = new StringBuilder(TURTLE_ICON_PATH);
     }
 
     public void paintTurtleIcon(Graphics g, Turtle turtle) {
-        Graphics2D g2d = (Graphics2D) g;
+        path.append(turtle.toString().toLowerCase()).toString();
+        path.append(".png").toString();
 
-        this.path.append(turtle.toString().toLowerCase()).toString();
-        this.path.append(".png").toString();
-
-        Image image = new ImageIcon(this.path.toString()).getImage();
+        Image image = new ImageIcon(path.toString()).getImage();
 
         g.drawImage(image, x - image.getWidth(null) / 2, y - image.getHeight(null) / 2, null);
     }
