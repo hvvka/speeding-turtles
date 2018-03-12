@@ -22,6 +22,8 @@ Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia ona swoje metody pa
    Kolejność rozgrywek graczy. Przechowuje ID graczy. Pierwszy w kolejności jest gracz na indeksie 0.
 - `currentPlaymaker : int`
    Gracz, który zarządza obecną rozgrywką. Ustawiony jest indeks z listy playingOrder. 
+- `winnerId : int`
+   Id gracza, który wygrał ostatnią rundę.
 
 
 ##### Metody
@@ -41,8 +43,8 @@ Zarządza grą i nie pozwala graczom oszukiwać. Udostępnia ona swoje metody pa
 + `getResult() : Map<Player, Integer>`
    Zwraca strukturę przechowującą gracza oraz jego wynik w punktach.
 + `winGame() : void` 
-   Pozwala na aktualizację wyniku gracza. Dodaje punkt obecnie rozgrywającemu graczowi. 
-   Trzeba ręcznie wywoływać pod stronie GUI przy każdej wygranej gracza.
+   Pozwala na aktualizację wyniku gracza. Dodaje punkt obecnie ostatnio rozgrywającemu graczowi. 
+   Trzeba ręcznie wywoływać pod stronie GUI przy każdej wygranej gracza, po wywołaniu metody `makeMove`.
 
 
 ## **Modele:**

@@ -30,10 +30,13 @@ public class GameImpl implements Game {
 
     private int currentPlaymaker;
 
+    private int winnerId;
+
     public GameImpl(List<String> playerNames) {
         players = createPlayers(playerNames);
         points = new HashMap<>();
         players.forEach(p -> points.put(p.getId(), 0));
+        winnerId = -1;
     }
 
     private List<List<Turtle>> createFields() {
@@ -168,10 +171,21 @@ public class GameImpl implements Game {
                 .subList(turtleCurrentIndex, lastTurtleIndex + 1);
         if (turtleCurrentFieldIndex + moveDistance >= FIELDS_NUMBER - 1) {
             board.getFields().get(FIELDS_NUMBER - 1).addAll(turtlesToBeMoved);
+            addWinnerPoints(turtleCurrentFieldIndex, turtleCurrentIndex);
         } else {
             board.getFields().get(turtleCurrentFieldIndex + moveDistance).addAll(turtlesToBeMoved);
         }
         turtlesToBeMoved.clear();
+    }
+
+    private void addWinnerPoints(int turtleCurrentFieldIndex, int turtleCurrentIndex) {
+        Turtle winnerTurtle = board.getFields().get(turtleCurrentFieldIndex).get(turtleCurrentIndex);
+        winnerId = players.stream()
+                .filter(player -> player.getTurtle().equals(winnerTurtle))
+                .findFirst().get()
+                .getId();
+
+        points.merge(winnerId, 1, (oldValue, one) -> oldValue + one);
     }
 
     private void moveTurtleFromStartField(Turtle turtleToBeMoved, int moveDistance) {
@@ -196,8 +210,7 @@ public class GameImpl implements Game {
     }
 
     @Override
-    //TODO: Winning player dosn't have to be a current one
-    public void winGame() {
-        points.merge(playingOrder.get(currentPlaymaker), 1, (oldValue, one) -> oldValue + one);
+    public Player winGame() {
+        return winnerId != -1 ? players.get(winnerId) : new Player(-1, "noone", Turtle.BLUE);
     }
 }

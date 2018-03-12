@@ -69,9 +69,7 @@ class BoardController {
 
     private void winnerCheck(List<Turtle> lastField) {
         if (lastField.isEmpty()) return;
-        //TODO: would be nice if winGame() would return a player which i could inject into new DecisionFrameController instance
-        game.winGame();
-        //TODO: change given parameter from current player to winning one
+        player = game.winGame();
         new DecisionFrameController(new DecisionFrame(), game, player);
         boardFrame.dispose();
     }

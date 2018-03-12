@@ -85,14 +85,15 @@ public class GameImplTest {
     public void winGame() {
         // given
         int currentPlaymaker = playingOrder.get(0);
-        int expectedScore = 1;
+        Player expectedPlayer = new Player(-1, "noone", Turtle.BLUE);
 
         // when
-        game.winGame();
-        int actualScore = game.getResult().get(players.get(currentPlaymaker));
+        Player actualPlayer = game.winGame();
 
         // then
-        Assert.assertEquals(expectedScore, actualScore);
+        Assert.assertEquals(expectedPlayer.getId(), actualPlayer.getId());
+        Assert.assertEquals(expectedPlayer.getName(), actualPlayer.getName());
+        Assert.assertEquals(expectedPlayer.getTurtle(), actualPlayer.getTurtle());
+        Assert.assertEquals(expectedPlayer.getCards(), actualPlayer.getCards());
     }
-
 }
