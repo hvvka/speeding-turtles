@@ -2,8 +2,6 @@ package com.pwr.game.gui.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.InputStream;
 import java.net.URL;
 
 public class MainFrame extends JFrame {
@@ -40,7 +38,6 @@ public class MainFrame extends JFrame {
         setContentPane(mainPanel);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        System.out.println(LOGO_PATH);
         logoLabel.setIcon(new ImageIcon(new ImageIcon(LOGO_PATH)
                 .getImage()
                 .getScaledInstance(LOGO_WIDTH, LOGO_HEIGHT, Image.SCALE_SMOOTH)));
