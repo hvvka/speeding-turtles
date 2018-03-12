@@ -16,6 +16,6 @@ public interface Game {
 
     Map<Player, Integer> getResult();
 
-    void winGame();
+    Player winGame();
 
 }
