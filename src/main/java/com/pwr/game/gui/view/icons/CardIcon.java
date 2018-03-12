@@ -7,35 +7,36 @@ import java.awt.*;
 
 public class CardIcon {
 
+    private static final String CARD_ICON_PATH = "src/main/resources/cards-icons/";
+    private static final int DEFAULT_ICON_WIDTH = 100;
+    private static final int DEFAULT_ICON_HEIGHT = 160;
+
     private StringBuilder path;
 
-    public CardIcon(Card card){
-        this.path = new StringBuilder("src/main/resources/cards-icons/");
+    public CardIcon() {
+        path = new StringBuilder(CARD_ICON_PATH);
     }
 
-    public ImageIcon paintCard(Card card){
-
-        if(card.getMove() > 0){
-                this.path.append("plus_").toString();}
-        else {
-                this.path.append("minus_").toString();
+    public ImageIcon paintCard(Card card) {
+        if (card.getMove() > 0) {
+            path.append("plus_");
+        } else {
+            path.append("minus_");
         }
 
-        if(Math.abs(card.getMove()) == 1){
-            this.path.append("one_").toString();
-        }
-        else {
-            this.path.append("two_").toString();
+        if (Math.abs(card.getMove()) == 1) {
+            path.append("one_");
+        } else {
+            path.append("two_");
         }
 
-        this.path.append(card.getTurtle().toString().toLowerCase()).toString();
-        this.path.append(".png").toString();
+        path.append(card.getTurtle().toString().toLowerCase());
+        path.append(".png");
 
-        ImageIcon imageIcon = new ImageIcon(this.path.toString());
+        ImageIcon imageIcon = new ImageIcon(path.toString());
         Image image = imageIcon.getImage();
-        Image newimg = image.getScaledInstance(100, 160,  Image.SCALE_SMOOTH);
+        Image newImage = image.getScaledInstance(DEFAULT_ICON_WIDTH, DEFAULT_ICON_HEIGHT, Image.SCALE_SMOOTH);
 
-        return new ImageIcon(newimg);
-        }
-
+        return new ImageIcon(newImage);
+    }
 }

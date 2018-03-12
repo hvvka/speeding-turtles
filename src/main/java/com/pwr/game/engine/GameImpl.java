@@ -84,8 +84,8 @@ public class GameImpl implements Game {
         board = new Board(createFields());
         playingOrder = createPlayingOrder();
 
-        Collections.shuffle(availableCards);            // miesza karty
-        players.forEach(p -> p.setCards(new ArrayList<>(getDeck())));    // daje po 5 kart do łapki gracza
+        Collections.shuffle(availableCards);
+        players.forEach(p -> p.setCards(new ArrayList<>(getDeck())));
 
         return board;
     }
@@ -127,7 +127,7 @@ public class GameImpl implements Game {
     @Override
     public Board makeMove(Card card) {
         if (!players.get(playingOrder.get(currentPlaymaker)).getCards().contains(card)) {
-            System.out.println("PLAYER DOESN'T HAVE SUCH CARD");   // to powinien by wyjątek, może kiedyś, w wersji 2.0 nim będzie
+            System.out.println("PLAYER DOESN'T HAVE SUCH CARD");   // it should be an exception
         }
 
         Turtle turtleToBeMoved = card.getTurtle();
@@ -158,8 +158,7 @@ public class GameImpl implements Game {
 
     private void throwCard(Card card) {
         trashCards.add(card);
-        players.get(playingOrder.get(currentPlaymaker)).getCards().remove(card);  // fixme musi usuwać różne obiekty, ale o tych samych wartościach
-
+        players.get(playingOrder.get(currentPlaymaker)).getCards().remove(card);
     }
 
     private void moveTurtleWithOtherTurtles(int moveDistance, int turtleCurrentFieldIndex, int turtleCurrentIndex) {

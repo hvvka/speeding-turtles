@@ -19,11 +19,13 @@ public class DecisionFrame extends JFrame {
 
     private static final int WIDTH = 500;
     private static final int HEIGHT = 500;
+
     private static final String DECISION_FRAME_TITLE = "Ranking graczy";
     private static final String CONGRATULATIONS_STRING = "Gratulacje wygrania ostatniej rundy";
     private static final String CONTINUE_BUTTON_TEXT = "Kontynuuj";
     private static final String RANKING_RESET_BUTTON_TEXT = "Resetuj ranking";
     private static final String GAME_EXIT_BUTTON_TEXT = "Zakończ grę";
+    private static final String[] RANKING_TABLE_COLUMN_NAMES = {"Gracz", "Liczba punktów"};
 
     private JPanel decisionFramePanel;
 
@@ -37,7 +39,6 @@ public class DecisionFrame extends JFrame {
 
     private JPanel rankingPanel;
     private JScrollPane rankingTableScrollPane;
-    private final String[] rankingTableColumnNames = {"Gracz", "Liczba punktów"};
 
     public JButton getContinueButton() {
         return continueButton;
@@ -87,7 +88,7 @@ public class DecisionFrame extends JFrame {
             rankingTableData[i][1] = entry.getValue();
             i++;
         }
-        JTable rankingTable = new JTable(new DefaultTableModel(rankingTableData, rankingTableColumnNames));
+        JTable rankingTable = new JTable(new DefaultTableModel(rankingTableData, RANKING_TABLE_COLUMN_NAMES));
         rankingTable.getColumnModel().getColumn(0).setCellRenderer(new CustomRenderer());
         rankingTableScrollPane.setViewportView(rankingTable);
         rankingPanel.repaint();
@@ -96,6 +97,11 @@ public class DecisionFrame extends JFrame {
 }
 
 class MapUtil {
+
+    private MapUtil() {
+        // util
+    }
+
     public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
         List<Map.Entry<K, V>> list = new ArrayList<>(map.entrySet());
         list.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
@@ -109,6 +115,7 @@ class MapUtil {
 }
 
 class CustomRenderer extends DefaultTableCellRenderer {
+
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

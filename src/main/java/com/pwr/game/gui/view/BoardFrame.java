@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class BoardFrame extends JFrame {
-    private JPanel panel1;
 
+    private JPanel boardPanel;
 
     public BoardFrame(BoardView boardView, ButtonPanel buttonPanel) {
         Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -16,6 +16,5 @@ public class BoardFrame extends JFrame {
         setVisible(true);
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
     }
 }

@@ -9,19 +9,19 @@ import javax.swing.*;
 /**
  * @author zlakomiak226190
  */
-public class DecisionFrameController {
+class DecisionFrameController {
+
+    private static final String EXIT_MESSAGE = "Do zobaczenia przy następnej grze!";
 
     private final DecisionFrame decisionFrame;
     private final Game game;
     private final Player lastWinner;
 
-    private final static String EXIT_MESSAGE = "Do zobaczenia przy następnej grze!";
-
     private JButton continueButton;
     private JButton rankingResetButton;
     private JButton gameExitButton;
 
-    public DecisionFrameController(DecisionFrame decisionFrame, Game game, Player lastWinner) {
+    DecisionFrameController(DecisionFrame decisionFrame, Game game, Player lastWinner) {
         this.decisionFrame = decisionFrame;
         this.game = game;
         this.lastWinner = lastWinner;

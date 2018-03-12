@@ -13,29 +13,32 @@ import java.util.List;
 
 public class BoardView extends JPanel {
 
-    //współrzędne pierwszego pola na planszy
-    //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
+    private static final String BACKROUND_PATH = "src/main/resources/board-icons/background.png";
 
-    Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+    //zmiana spowoduje przesunięcie całej planszy (pól i zółwi)
+    private Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
     private int xStart = (int) (dimension.width / 7.5);
     private int yStart = (int) (dimension.height / 1.6);
-    private FieldIcon field;
-    private Image imageIcon;
+    private transient Image imageIcon;
 
     private List<List<Turtle>> fields;
-    private List<FieldIcon> fieldsIcons;
+    private transient List<FieldIcon> fieldsIcons;
 
     public void setFields(List<List<Turtle>> fields) {
         this.fields = fields;
+    }
+
+    public BoardView(List<List<Turtle>> fields) {
+        this.fields = fields;
+        imageIcon = new ImageIcon(BACKROUND_PATH).getImage();
+        setFocusable(true);
     }
 
     //metoda wywoływana jak trzeba przerysować ekran
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         g.drawImage(imageIcon, 0, 0, getWidth(), getHeight(), this);
-
 
         //zawsze maluje całą planszę
         paintBoardFields(g);
@@ -45,43 +48,34 @@ public class BoardView extends JPanel {
     }
 
 
-    public void paintBoardFields(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+    private void paintBoardFields(Graphics g) {
+        int xTranslation = dimension.width / 9;
+        int yTranslation = dimension.height / 16;
 
-
-        int xTranslation = (int) (dimension.width / 9);
-        int yTranslation = (int) (dimension.height / 16);
-        ;
         int x = xStart;
         int y = yStart;
 
-        fieldsIcons = new ArrayList<FieldIcon>();
+        fieldsIcons = new ArrayList<>();
 
         for (int i = 0; i < fields.size(); i++) {
-
-            field = new FieldIcon(x, y);
+            FieldIcon field = new FieldIcon(x, y);
             field.paintFieldIcon(g, false);
             fieldsIcons.add(field);
 
             x += xTranslation;
             y -= yTranslation;
+
             if (i == fields.size() - 1) {
                 field.paintFieldIcon(g, true);
                 fieldsIcons.add(field);
             }
-
-
         }
     }
-
     //rysuje żółwie odpowiednio na polach
-    public void paintTurtlesOnFields(Graphics g, List<List<Turtle>> fields) {
-        Graphics2D g2d = (Graphics2D) g;
 
-
+    private void paintTurtlesOnFields(Graphics g, List<List<Turtle>> fields) {
         for (int i = 0; i < GameImpl.FIELDS_NUMBER; i++) {
             if (i == 0) {
-
                 int x = fieldsIcons.get(i).getX() - 30;
                 int y = fieldsIcons.get(i).getY() - 40;
 
@@ -94,7 +88,6 @@ public class BoardView extends JPanel {
                     } else {
                         x = fieldsIcons.get(i).getX() - 30;
                     }
-
                 }
             } else {
                 int x = fieldsIcons.get(i).getX();
@@ -109,13 +102,5 @@ public class BoardView extends JPanel {
             }
         }
     }
-
-
-    public BoardView(List<List<Turtle>> fields) {
-        this.fields = fields;
-        imageIcon = new ImageIcon("src/main/resources/board-icons/background.png").getImage();
-        setFocusable(true);
-    }
-
 }
 
