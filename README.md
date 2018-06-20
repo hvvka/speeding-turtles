@@ -1,5 +1,15 @@
-# PĘDZĄCE ŻÓŁWIE
-----------------
+# speeding-turtles
+
+
+Game made for university laboratories in group of 5 people.
+
+![menu](img/menu.png)
+
+![game](img/game.png)
+
+
+-----------
+
 
 Zarys klas
 ==========
